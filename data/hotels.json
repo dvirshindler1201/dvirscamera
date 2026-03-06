@@ -1,0 +1,133 @@
+[
+  {
+    "id": "500rai",
+    "name": "500Rai Floating Resort",
+    "location": "Khao Sok, Thailand",
+    "photos": [
+      {
+        "src": "/assets/images/hotels/500rai/aerial-wide.webp",
+        "caption": "From Above",
+        "tag": "Khao Sok, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/500rai/dawn-lake.webp",
+        "caption": "Dawn on the Lake",
+        "tag": "Khao Sok, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/500rai/top-down.webp",
+        "caption": "Top Down",
+        "tag": "Khao Sok, Thailand",
+        "orientation": "portrait"
+      },
+      {
+        "src": "/assets/images/hotels/500rai/kayak-fleet.webp",
+        "caption": "The Fleet",
+        "tag": "Khao Sok, Thailand",
+        "orientation": "portrait"
+      }
+    ]
+  },
+  {
+    "id": "grand-hyatt",
+    "name": "Grand Hyatt Erawan Bangkok",
+    "location": "Bangkok, Thailand",
+    "photos": [
+      {
+        "src": "/assets/images/hotels/grand-hyatt/the-bar.webp",
+        "caption": "The Bar",
+        "tag": "Bangkok, Thailand",
+        "orientation": "portrait"
+      },
+      {
+        "src": "/assets/images/hotels/grand-hyatt/grand-atrium.webp",
+        "caption": "Grand Atrium",
+        "tag": "Bangkok, Thailand",
+        "orientation": "portrait"
+      },
+      {
+        "src": "/assets/images/hotels/grand-hyatt/gaston.webp",
+        "caption": "Gaston",
+        "tag": "Bangkok, Thailand",
+        "orientation": "landscape"
+      }
+    ]
+  },
+  {
+    "id": "ban-sainai",
+    "name": "Ban Sainai Resort",
+    "location": "Krabi, Thailand",
+    "photos": [
+      {
+        "src": "/assets/images/hotels/ban-sainai/the-pool.webp",
+        "caption": "The Pool",
+        "tag": "Krabi, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/ban-sainai/limestone-jungle.webp",
+        "caption": "Limestone Jungle",
+        "tag": "Krabi, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/ban-sainai/jungle-villa.webp",
+        "caption": "Jungle Villa",
+        "tag": "Krabi, Thailand",
+        "orientation": "portrait"
+      }
+    ]
+  },
+  {
+    "id": "thantara",
+    "name": "Thantara Resort",
+    "location": "Chiang Mai, Thailand",
+    "photos": [
+      {
+        "src": "/assets/images/hotels/thantara/rice-fields.webp",
+        "caption": "Rice Fields",
+        "tag": "Chiang Mai, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/thantara/the-lake.webp",
+        "caption": "The Lake",
+        "tag": "Chiang Mai, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/thantara/the-grounds.webp",
+        "caption": "The Grounds",
+        "tag": "Chiang Mai, Thailand",
+        "orientation": "landscape"
+      }
+    ]
+  },
+  {
+    "id": "moxy",
+    "name": "Moxy by Marriott",
+    "location": "Bangkok, Thailand",
+    "photos": [
+      {
+        "src": "/assets/images/hotels/moxy/signature-drinks.webp",
+        "caption": "Signature Drinks",
+        "tag": "Bangkok, Thailand",
+        "orientation": "landscape"
+      },
+      {
+        "src": "/assets/images/hotels/moxy/hot-and-steamy.webp",
+        "caption": "Hot & Steamy",
+        "tag": "Bangkok, Thailand",
+        "orientation": "portrait"
+      },
+      {
+        "src": "/assets/images/hotels/moxy/the-room.webp",
+        "caption": "The Room",
+        "tag": "Bangkok, Thailand",
+        "orientation": "portrait"
+      }
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "photos": [
+    {
+      "src": "/assets/images/lifestyle/golden-hour.webp",
+      "caption": "Golden Hour",
+      "location": "Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/lifestyle/khao-sok-mornings.webp",
+      "caption": "Khao Sok Mornings",
+      "location": "Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/lifestyle/jungle-escape.webp",
+      "caption": "Jungle Escape",
+      "location": "Ban Sainai, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/lifestyle/lost-in-the-view.webp",
+      "caption": "Lost in the View",
+      "location": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    }
+  ]
+}

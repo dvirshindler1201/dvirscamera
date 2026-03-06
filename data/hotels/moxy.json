@@ -1,0 +1,25 @@
+{
+  "id": "moxy",
+  "name": "Moxy by Marriott",
+  "location": "Bangkok, Thailand",
+  "photos": [
+    {
+      "src": "/assets/images/hotels/moxy/signature-drinks.webp",
+      "caption": "Signature Drinks",
+      "tag": "Bangkok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/hot-and-steamy.webp",
+      "caption": "Hot & Steamy",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/the-room.webp",
+      "caption": "The Room",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    }
+  ]
+}
