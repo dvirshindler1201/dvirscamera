@@ -1,0 +1,82 @@
+{
+  "photos": [
+    {
+      "src": "/assets/images/travel/lone-paddler.webp",
+      "caption": "Lone Paddler",
+      "location": "Israel",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/rice-terraces.webp",
+      "caption": "Rice Terraces",
+      "location": "Southeast Asia",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/desert-at-dawn.webp",
+      "caption": "Desert at Dawn",
+      "location": "Paran, Israel",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/himalayan-sunrise.webp",
+      "caption": "Himalayan Sunrise",
+      "location": "Nepal",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/crystal-waters.webp",
+      "caption": "Crystal Waters",
+      "location": "Israel",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/village-ride.webp",
+      "caption": "Village Ride",
+      "location": "Sri Lanka",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/the-one-koi.webp",
+      "caption": "The One Koi",
+      "location": "Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/prayer-flags.webp",
+      "caption": "Prayer Flags",
+      "location": "Nepal",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/house-on-the-edge.webp",
+      "caption": "House on the Edge",
+      "location": "Annapurna, Nepal",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/barrel-wave.webp",
+      "caption": "The Barrel Wave",
+      "location": "Sri Lanka",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/wine-country.webp",
+      "caption": "Wine Country",
+      "location": "Golan Heights, Israel",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/travel/hooping-nowhere.webp",
+      "caption": "Hooping Nowhere",
+      "location": "Annapurna, Nepal",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/travel/cloud-nine.webp",
+      "caption": "Cloud Nine",
+      "location": "Annapurna Circuit, Nepal",
+      "orientation": "landscape"
+    }
+  ]
+}

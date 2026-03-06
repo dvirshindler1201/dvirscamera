@@ -1,0 +1,25 @@
+{
+  "id": "thantara",
+  "name": "Thantara Resort",
+  "location": "Chiang Mai, Thailand",
+  "photos": [
+    {
+      "src": "/assets/images/hotels/thantara/rice-fields.webp",
+      "caption": "Rice Fields",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/the-lake.webp",
+      "caption": "The Lake",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/the-grounds.webp",
+      "caption": "The Grounds",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "landscape"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "grand-hyatt",
+  "name": "Grand Hyatt Erawan Bangkok",
+  "location": "Bangkok, Thailand",
+  "photos": [
+    {
+      "src": "/assets/images/hotels/grand-hyatt/the-bar.webp",
+      "caption": "The Bar",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/grand-atrium.webp",
+      "caption": "Grand Atrium",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/gaston.webp",
+      "caption": "Gaston",
+      "tag": "Bangkok, Thailand",
+      "orientation": "landscape"
+    }
+  ]
+}
