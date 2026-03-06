@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: dvirshindler1201/dvirscamera
   branch: main
+  base_url: https://dvirscamera-oauth.dvir-shindler.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
