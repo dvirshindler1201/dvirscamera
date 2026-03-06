@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head><title>Authenticating...</title></head>
+<body>
+<p>Completing login, please wait...</p>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get('token');
+  var provider = params.get('provider') || 'github';
+  
+  if (!token) {
+    document.body.innerHTML = '<p>Error: no token received. Please close this window and try again.</p>';
+    return;
+  }
+
+  var message = 'authorization:' + provider + ':success:' + JSON.stringify({
+    token: token,
+    provider: provider
+  });
+
+  function send() {
+    if (window.opener) {
+      window.opener.postMessage(message, window.location.origin);
+      setTimeout(function() { window.close(); }, 300);
+    } else {
+      document.body.innerHTML = '<p>Login complete. You can close this window.</p>';
+    }
+  }
+
+  send();
+  setTimeout(send, 200);
+  setTimeout(send, 500);
+})();
+</script>
+</body>
+</html>
