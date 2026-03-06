@@ -737,10 +737,16 @@ function createGI(photo, blockId) {
 }
 
 async function renderHotels() {
-  let hotels;
-  try { hotels = await fetch('/data/hotels.json').then(r => r.json()); }
-  catch(e) { document.getElementById('cat-hotels').innerHTML = '<p style="color:var(--muted);padding:40px 0;">Could not load hotels.</p>'; return; }
-
+ const hotelIds = ["500rai", "grand-hyatt", "ban-sainai", "thantara", "moxy"];
+  let hotels = [];
+  try {
+    hotels = await Promise.all(
+      hotelIds.map(id => fetch(`/data/hotels/${id}.json`).then(r => r.json()))
+    );
+  } catch(e) {
+    document.getElementById('cat-hotels').innerHTML = '<p style="color:var(--muted);padding:40px 0;">Could not load hotels.</p>';
+    return;
+  }
   const container = document.getElementById('cat-hotels');
   container.innerHTML = '';
 
