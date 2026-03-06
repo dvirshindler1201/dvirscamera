@@ -5,8 +5,6 @@ backend:
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
-logo_url: /assets/images/logos/500rai.png
-
 collections:
 
   - name: "hero"
@@ -21,7 +19,12 @@ collections:
             widget: "list"
             summary: "{{fields.alt}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hero", hint: "Upload landscape (horizontal) photos only for best results"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hero"
+                public_folder: "/assets/images/hero"
+                hint: "Upload landscape (horizontal) photos only for best results"
               - {label: "Alt Text / Description", name: "alt", widget: "string"}
 
   - name: "hotels"
@@ -38,7 +41,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hotels/500rai"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/500rai"
+                public_folder: "/assets/images/hotels/500rai"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location Tag", name: "tag", widget: "string", default: "Khao Sok, Thailand"}
               - label: "Orientation"
@@ -58,7 +65,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hotels/grand-hyatt"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/grand-hyatt"
+                public_folder: "/assets/images/hotels/grand-hyatt"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location Tag", name: "tag", widget: "string", default: "Bangkok, Thailand"}
               - label: "Orientation"
@@ -77,7 +88,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hotels/ban-sainai"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/ban-sainai"
+                public_folder: "/assets/images/hotels/ban-sainai"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location Tag", name: "tag", widget: "string", default: "Krabi, Thailand"}
               - label: "Orientation"
@@ -96,7 +111,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hotels/thantara"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/thantara"
+                public_folder: "/assets/images/hotels/thantara"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location Tag", name: "tag", widget: "string", default: "Chiang Mai, Thailand"}
               - label: "Orientation"
@@ -115,7 +134,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/hotels/moxy"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/moxy"
+                public_folder: "/assets/images/hotels/moxy"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location Tag", name: "tag", widget: "string", default: "Bangkok, Thailand"}
               - label: "Orientation"
@@ -135,7 +158,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}} — {{fields.location}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/travel"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/travel"
+                public_folder: "/assets/images/travel"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location", name: "location", widget: "string"}
               - label: "Orientation"
@@ -156,7 +183,11 @@ collections:
             widget: "list"
             summary: "{{fields.caption}} — {{fields.location}}"
             fields:
-              - {label: "Photo", name: "src", widget: "image", media_folder: "/assets/images/lifestyle"}
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/lifestyle"
+                public_folder: "/assets/images/lifestyle"
               - {label: "Caption", name: "caption", widget: "string"}
               - {label: "Location", name: "location", widget: "string"}
               - label: "Orientation"
