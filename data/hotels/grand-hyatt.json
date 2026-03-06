@@ -20,6 +20,12 @@
       "caption": "Gaston",
       "tag": "Bangkok, Thailand",
       "orientation": "landscape"
+    },
+    {
+      "tag": "Bangkok, Thailand",
+      "src": "/assets/images/hotels/grand-hyatt/dsc06033-1-.webp",
+      "caption": "Gaston 2",
+      "orientation": "landscape"
     }
   ]
 }
