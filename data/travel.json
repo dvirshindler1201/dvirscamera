@@ -3,7 +3,7 @@
     {
       "src": "/assets/images/travel/lone-paddler.webp",
       "caption": "Lone Paddler",
-      "location": "Israel",
+      "location": "Thailand",
       "orientation": "landscape"
     },
     {
@@ -27,7 +27,7 @@
     {
       "src": "/assets/images/travel/crystal-waters.webp",
       "caption": "Crystal Waters",
-      "location": "Israel",
+      "location": "Thailand",
       "orientation": "landscape"
     },
     {
@@ -51,7 +51,7 @@
     {
       "src": "/assets/images/travel/house-on-the-edge.webp",
       "caption": "House on the Edge",
-      "location": "Annapurna, Nepal",
+      "location": "Nepal",
       "orientation": "landscape"
     },
     {
@@ -69,13 +69,13 @@
     {
       "src": "/assets/images/travel/hooping-nowhere.webp",
       "caption": "Hooping Nowhere",
-      "location": "Annapurna, Nepal",
+      "location": "Nepal",
       "orientation": "portrait"
     },
     {
       "src": "/assets/images/travel/cloud-nine.webp",
       "caption": "Cloud Nine",
-      "location": "Annapurna Circuit, Nepal",
+      "location": "Nepal",
       "orientation": "landscape"
     }
   ]
