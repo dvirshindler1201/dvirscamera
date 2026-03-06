@@ -26,6 +26,12 @@
       "caption": "The Fleet",
       "tag": "Khao Sok, Thailand",
       "orientation": "portrait"
+    },
+    {
+      "tag": "Khao Sok, Thailand",
+      "orientation": "landscape",
+      "src": "/assets/images/hotels/500rai/dji_20250809121054_0122_d-2.webp",
+      "caption": "Pool Break"
     }
   ]
 }
