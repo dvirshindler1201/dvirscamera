@@ -1,5 +1,4 @@
 {
-  "id": "grand-hyatt",
   "name": "Grand Hyatt Erawan Bangkok",
   "location": "Bangkok, Thailand",
   "photos": [
@@ -20,6 +19,55 @@
       "caption": "Gaston",
       "tag": "Bangkok, Thailand",
       "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC05899.webp",
+      "caption": "Royal Hallway",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC05910.webp",
+      "caption": "Happy Hour",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC05953.webp",
+      "caption": "The Lobby",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC05987.webp",
+      "caption": "The Grand Stairs",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC06002.webp",
+      "caption": "Afternoon Drinks",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC06048.webp",
+      "caption": "Sunlight",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC06093.webp",
+      "caption": "Evening Wine",
+      "tag": "Bangkok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/grand-hyatt/DSC06112.webp",
+      "caption": "Dinner is Served",
+      "tag": "Bangkok, Thailand",
+      "orientation": "landscape"
     }
-  ]
+  ],
+  "id": "grand-hyatt"
 }
