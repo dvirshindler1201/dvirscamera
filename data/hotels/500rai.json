@@ -1,5 +1,4 @@
 {
-  "id": "500rai",
   "name": "500Rai Floating Resort",
   "location": "Khao Sok, Thailand",
   "photos": [
@@ -28,10 +27,71 @@
       "orientation": "portrait"
     },
     {
-      "tag": "Khao Sok, Thailand",
-      "orientation": "landscape",
       "src": "/assets/images/hotels/500rai/dji_20250809121054_0122_d-2.webp",
-      "caption": "Pool Break"
+      "caption": "Pool Break",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DJI_20250808193853_0072_D.webp",
+      "caption": "Overhead",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05255.webp",
+      "caption": "The Entrance",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05305.webp",
+      "caption": "Floating Bar",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05322.webp",
+      "caption": "The \"Hallways\"",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05359.webp",
+      "caption": "Night @ the Lake",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05432.webp",
+      "caption": "Calm",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05532.webp",
+      "caption": "View with the Meal",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05533.webp",
+      "caption": "Mountains",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05616.webp",
+      "caption": "Jaw Dropping Sunsets",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/500rai/DSC05651.webp",
+      "caption": "Colours",
+      "tag": "Khao Sok, Thailand",
+      "orientation": "portrait"
     }
-  ]
+  ],
+  "id": "500rai"
 }
