@@ -1,5 +1,4 @@
 {
-  "id": "ban-sainai",
   "name": "Ban Sainai Resort",
   "location": "Krabi, Thailand",
   "photos": [
@@ -20,6 +19,43 @@
       "caption": "Jungle Villa",
       "tag": "Krabi, Thailand",
       "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DJI_20250802101354_0026_D.webp",
+      "caption": "The Resort from Above",
+      "tag": "Krabi, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DSC04785.webp",
+      "caption": "Morning Tea",
+      "tag": "Krabi, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DSC04912.webp",
+      "caption": "Through the Trees",
+      "tag": "Krabi, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DSC04915.webp",
+      "caption": "Rest",
+      "tag": "Krabi, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DSC04937.webp",
+      "caption": "In the Jungle",
+      "tag": "Krabi, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/ban-sainai/DSC04946.webp",
+      "caption": "Lone Kayak",
+      "tag": "Krabi, Thailand",
+      "orientation": "portrait"
     }
-  ]
+  ],
+  "id": "ban-sainai"
 }
