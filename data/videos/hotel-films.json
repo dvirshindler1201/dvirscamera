@@ -1,0 +1,29 @@
+{
+  "films": [
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "500Rai Floating Resort",
+      "location": "Khao Sok, Thailand"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Grand Hyatt Erawan",
+      "location": "Bangkok, Thailand"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Ban Sainai Resort",
+      "location": "Krabi, Thailand"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Thantara Resort",
+      "location": "Chiang Mai, Thailand"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Moxy Bangkok",
+      "location": "Bangkok, Thailand"
+    }
+  ]
+}
