@@ -274,6 +274,10 @@ section{padding:116px 60px;}
 .film-info{position:absolute;bottom:0;left:0;right:0;padding:20px;}
 .film-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--cl);margin-bottom:4px;}
 .film-loc{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--al);}
+  .film-iframe-hover{position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;}
+.film-iframe-hover iframe{width:100%;height:100%;border:none;}
+.film-card:hover .film-iframe-hover{opacity:1;}
+.film-card:hover .film-thumb{opacity:0;transition:opacity .5s;}
 
 /* ── VIDEO LIGHTBOX ── */
 .vlb{position:fixed;inset:0;background:rgba(10,10,12,.97);z-index:2000;display:none;align-items:center;justify-content:center;}
@@ -836,7 +840,15 @@ async function renderFilms() {
 
   container.innerHTML = '';
 
-  function buildFilmsSection(title, films) {
+  async function getVimeoThumb(vimeoId) {
+    try {
+      const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${vimeoId}`);
+      const data = await res.json();
+      return data.thumbnail_url_with_play_button || data.thumbnail_url || null;
+    } catch { return null; }
+  }
+
+  async function buildFilmsSection(title, films) {
     if (!films.length) return null;
     const section = document.createElement('div');
     section.className = 'films-section';
@@ -844,14 +856,13 @@ async function renderFilms() {
     const grid = document.createElement('div');
     grid.className = 'films-grid';
 
-    films.forEach(film => {
+    await Promise.all(films.map(async film => {
+      const thumb = await getVimeoThumb(film.vimeoId);
       const card = document.createElement('div');
       card.className = 'film-card';
-      // Use Vimeo's thumbnail API via oembed
-      const thumbUrl = `https://vumbnail.com/${film.vimeoId}.jpg`;
       card.innerHTML = `
-        <img class="film-thumb" src="${thumbUrl}" alt="${film.title}" loading="lazy"
-             onerror="this.style.display='none'"/>
+        ${thumb ? `<img class="film-thumb" src="${thumb}" alt="${film.title}" loading="lazy"/>` : ''}
+        <div class="film-iframe-hover"></div>
         <div class="film-overlay"></div>
         <div class="film-play">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -863,16 +874,32 @@ async function renderFilms() {
           <div class="film-loc">${film.location}</div>
         </div>
       `;
+
+      const hoverDiv = card.querySelector('.film-iframe-hover');
+
+      card.addEventListener('mouseenter', () => {
+        if (!card.dataset.iframeLoaded) {
+          card.dataset.iframeLoaded = '1';
+          hoverDiv.innerHTML = `<iframe src="https://player.vimeo.com/video/${film.vimeoId}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0&controls=0" allow="autoplay" frameborder="0"></iframe>`;
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        hoverDiv.innerHTML = '';
+        card.dataset.iframeLoaded = '';
+      });
       card.addEventListener('click', () => openVlb(film.vimeoId));
+
       grid.appendChild(card);
-    });
+    }));
 
     section.appendChild(grid);
     return section;
   }
 
-  const hotelSection = buildFilmsSection('Hotel Films', hotelFilms);
-  const travelSection = buildFilmsSection('Travel Films', travelFilms);
+  const [hotelSection, travelSection] = await Promise.all([
+    buildFilmsSection('Hotel Films', hotelFilms),
+    buildFilmsSection('Travel Films', travelFilms)
+  ]);
 
   if (hotelSection) container.appendChild(hotelSection);
   if (travelSection) container.appendChild(travelSection);
