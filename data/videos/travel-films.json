@@ -1,0 +1,29 @@
+{
+  "films": [
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Thailand — Golden Hour",
+      "location": "Thailand"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Travel Film 2",
+      "location": "Location"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Travel Film 3",
+      "location": "Location"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Travel Film 4",
+      "location": "Location"
+    },
+    {
+      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "title": "Travel Film 5",
+      "location": "Location"
+    }
+  ]
+}
