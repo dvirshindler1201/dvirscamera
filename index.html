@@ -233,6 +233,61 @@ section{padding:116px 60px;}
 .gallery-grid{display:none;}
 .gallery-grid.active{display:block;}
 
+/* ── FILMS ── */
+.films-section{margin-bottom:60px;}
+.films-section:last-child{margin-bottom:0;}
+.films-section-title{
+  font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:28px;padding-bottom:14px;
+  border-bottom:1px solid rgba(232,217,192,.08);
+}
+.films-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:16px;
+}
+.film-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  background:#111;aspect-ratio:16/9;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1);
+}
+.film-card.visible{opacity:1;transform:translateY(0);}
+.film-thumb{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.23,1,.32,1);}
+.film-card:hover .film-thumb{transform:scale(1.04);}
+.film-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,20,22,.92) 0%,rgba(20,20,22,.2) 50%,transparent 100%);
+  transition:background .4s;
+}
+.film-card:hover .film-overlay{background:linear-gradient(to top,rgba(20,20,22,.96) 0%,rgba(20,20,22,.4) 50%,transparent 100%);}
+.film-play{
+  width:56px;height:56px;border-radius:50%;
+  border:2px solid rgba(232,217,192,.7);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .3s,background .3s,transform .3s;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.film-card:hover .film-play{border-color:var(--al);background:rgba(138,158,121,.2);transform:translate(-50%,-50%) scale(1.1);}
+.film-play svg{stroke:var(--champagne);margin-left:4px;transition:stroke .3s;}
+.film-card:hover .film-play svg{stroke:var(--al);}
+.film-info{position:absolute;bottom:0;left:0;right:0;padding:20px;}
+.film-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--cl);margin-bottom:4px;}
+.film-loc{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--al);}
+
+/* ── VIDEO LIGHTBOX ── */
+.vlb{position:fixed;inset:0;background:rgba(10,10,12,.97);z-index:2000;display:none;align-items:center;justify-content:center;}
+.vlb.open{display:flex;}
+.vlb-inner{position:relative;width:90vw;max-width:1100px;}
+.vlb-ratio{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;}
+.vlb-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.vlb-close{
+  position:absolute;top:-44px;right:0;
+  color:var(--champagne);font-size:1.7rem;cursor:pointer;
+  background:none;border:none;line-height:1;transition:color .3s;
+}
+.vlb-close:hover{color:var(--al);}
+
 /* ── HOTEL BLOCKS ── */
 .hotel-block{margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid rgba(232,217,192,.08);}
 .hotel-block:last-child{border-bottom:none;margin-bottom:0;}
@@ -413,18 +468,6 @@ footer{
   .hero-title{font-size:clamp(2.4rem,11vw,3.2rem);}
 }
 </style>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
 </head>
 <body>
 
@@ -438,6 +481,16 @@ footer{
   <button class="lb-nav" id="lbPrev">&#8592;</button>
   <img class="lb-img" id="lbImg" alt="" loading="lazy"/>
   <button class="lb-nav" id="lbNext">&#8594;</button>
+</div>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="vlb" id="vlb">
+  <div class="vlb-inner">
+    <button class="vlb-close" id="vlbClose">&times;</button>
+    <div class="vlb-ratio">
+      <iframe id="vlbFrame" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
 </div>
 
 <!-- BACK TO TOP -->
@@ -537,13 +590,19 @@ footer{
     <div><div class="sec-lbl">Portfolio</div><h2 class="work-title">Selected<br><em>Work</em></h2></div>
   </div>
   <div class="cat-tabs reveal rd1">
-    <button class="cat-tab active" data-cat="hotels">Luxury Hotels</button>
+    <button class="cat-tab active" data-cat="films">Films</button>
+    <button class="cat-tab" data-cat="hotels">Luxury Hotels</button>
     <button class="cat-tab" data-cat="travel">Travel</button>
     <button class="cat-tab" data-cat="lifestyle">Lifestyle</button>
   </div>
 
+  <!-- Films — dynamically rendered -->
+  <div class="gallery-grid active" id="cat-films">
+    <div class="gallery-loading">Loading films…</div>
+  </div>
+
   <!-- Hotels — dynamically rendered -->
-  <div class="gallery-grid active" id="cat-hotels">
+  <div class="gallery-grid" id="cat-hotels">
     <div class="gallery-loading">Loading portfolio…</div>
   </div>
 
@@ -573,12 +632,12 @@ footer{
     </div>
     <div class="about-text">
       <h2 class="about-hdg reveal rd1">A lens<br>shaped by<br><em>wanderlust</em></h2>
-      <p class="about-body reveal rd2">I'm Dvir, a photographer and visual storyteller with a deep obsession for light, place, and the authentic moments that define a destination. My work spans luxury hotel photography, travel content, and lifestyle brand partnerships across Asia and beyond.</p>
+      <p class="about-body reveal rd2">I'm Dvir — a photographer and visual storyteller with a deep obsession for light, place, and the authentic moments that define a destination. My work spans luxury hotel photography, travel content, and lifestyle brand partnerships across Asia and beyond.</p>
       <p class="about-body reveal rd2">I partner with hotels and travel brands who believe that great imagery isn't just documentation — it's a feeling. Together with my partner, we create authentic lifestyle content that puts the viewer inside the experience.</p>
       <div class="about-offers reveal rd3">
         <div class="offer-row">
           <div class="offer-num">01</div>
-          <div class="offer-text"><h4>Hotels &amp; Resorts</h4><p>Full property campaigns - architecture, interiors, amenities and atmosphere.</p></div>
+          <div class="offer-text"><h4>Hotels &amp; Resorts</h4><p>Full property campaigns — architecture, interiors, amenities and atmosphere.</p></div>
         </div>
         <div class="offer-row">
           <div class="offer-num">02</div>
@@ -598,7 +657,7 @@ footer{
   <div class="contact-left">
     <div class="sec-lbl reveal">Let's Connect</div>
     <h2 class="contact-hdg reveal rd1">Let's create<br>something<br><em>unforgettable</em></h2>
-    <p class="contact-desc reveal rd2">Whether you're a hotel brand seeking immersive content, a travel company looking for a creative partner, or a brand in need of authentic lifestyle imagery ; I'd love to hear from you.</p>
+    <p class="contact-desc reveal rd2">Whether you're a hotel brand seeking immersive content, a travel company looking for a creative partner, or a brand in need of authentic lifestyle imagery — I'd love to hear from you.</p>
     <div class="reveal rd3">
       <button class="clink" id="emailBtn">
         <div class="clink-icon">&#9993;</div>
@@ -736,8 +795,103 @@ function createGI(photo, blockId) {
   return div;
 }
 
+// ══════════════════════════════════════════════
+//  VIDEO LIGHTBOX
+// ══════════════════════════════════════════════
+const vlb = document.getElementById('vlb');
+const vlbFrame = document.getElementById('vlbFrame');
+document.getElementById('vlbClose').addEventListener('click', closeVlb);
+vlb.addEventListener('click', e => { if (e.target === vlb) closeVlb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && vlb.classList.contains('open')) closeVlb(); });
+
+function openVlb(vimeoId) {
+  vlbFrame.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&color=8a9e79&title=0&byline=0&portrait=0`;
+  vlb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVlb() {
+  vlb.classList.remove('open');
+  vlbFrame.src = '';
+  document.body.style.overflow = '';
+}
+
+// ══════════════════════════════════════════════
+//  FILMS
+// ══════════════════════════════════════════════
+async function renderFilms() {
+  const container = document.getElementById('cat-films');
+  let hotelFilms = [], travelFilms = [];
+
+  try {
+    const [hRes, tRes] = await Promise.all([
+      fetch('/data/videos/hotel-films.json'),
+      fetch('/data/videos/travel-films.json')
+    ]);
+    hotelFilms = hRes.ok ? (await hRes.json()).films || [] : [];
+    travelFilms = tRes.ok ? (await tRes.json()).films || [] : [];
+  } catch(e) {
+    container.innerHTML = '<p style="color:var(--muted);padding:40px 0;">Could not load films.</p>';
+    return;
+  }
+
+  container.innerHTML = '';
+
+  function buildFilmsSection(title, films) {
+    if (!films.length) return null;
+    const section = document.createElement('div');
+    section.className = 'films-section';
+    section.innerHTML = `<div class="films-section-title">${title}</div>`;
+    const grid = document.createElement('div');
+    grid.className = 'films-grid';
+
+    films.forEach(film => {
+      const card = document.createElement('div');
+      card.className = 'film-card';
+      // Use Vimeo's thumbnail API via oembed
+      const thumbUrl = `https://vumbnail.com/${film.vimeoId}.jpg`;
+      card.innerHTML = `
+        <img class="film-thumb" src="${thumbUrl}" alt="${film.title}" loading="lazy"
+             onerror="this.style.display='none'"/>
+        <div class="film-overlay"></div>
+        <div class="film-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3" fill="var(--champagne)" stroke="none"/>
+          </svg>
+        </div>
+        <div class="film-info">
+          <div class="film-name">${film.title}</div>
+          <div class="film-loc">${film.location}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => openVlb(film.vimeoId));
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    return section;
+  }
+
+  const hotelSection = buildFilmsSection('Hotel Films', hotelFilms);
+  const travelSection = buildFilmsSection('Travel Films', travelFilms);
+
+  if (hotelSection) container.appendChild(hotelSection);
+  if (travelSection) container.appendChild(travelSection);
+
+  if (!hotelFilms.length && !travelFilms.length) {
+    container.innerHTML = '<p style="color:var(--muted);padding:60px 0;text-align:center;font-size:.8rem;letter-spacing:.1em;">Films coming soon.</p>';
+    return;
+  }
+
+  setTimeout(() => {
+    container.querySelectorAll('.film-card').forEach((card, i) => {
+      setTimeout(() => card.classList.add('visible'), i * 80);
+    });
+  }, 100);
+}
+
 async function renderHotels() {
- const hotelIds = ["500rai", "grand-hyatt", "ban-sainai", "thantara", "moxy"];
+  // Fetch individual hotel files — CMS updates these directly, always in sync
+  const hotelIds = ["500rai", "grand-hyatt", "ban-sainai", "thantara", "moxy"];
   let hotels = [];
   try {
     hotels = await Promise.all(
@@ -747,6 +901,7 @@ async function renderHotels() {
     document.getElementById('cat-hotels').innerHTML = '<p style="color:var(--muted);padding:40px 0;">Could not load hotels.</p>';
     return;
   }
+
   const container = document.getElementById('cat-hotels');
   container.innerHTML = '';
 
@@ -965,7 +1120,15 @@ document.querySelectorAll('.cat-tab').forEach(tab => {
     tab.classList.add('active');
     const grid = document.getElementById('cat-' + tab.dataset.cat);
     grid.classList.add('active');
-    setTimeout(() => revealItems(grid.querySelectorAll('.gi:not(.gi-hidden)')), 40);
+    if (tab.dataset.cat === 'films') {
+      setTimeout(() => {
+        grid.querySelectorAll('.film-card:not(.visible)').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), i * 80);
+        });
+      }, 40);
+    } else {
+      setTimeout(() => revealItems(grid.querySelectorAll('.gi:not(.gi-hidden)')), 40);
+    }
   });
 });
 
@@ -1056,6 +1219,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 initHero();
 initMarquee();
 initLogoScroll();
+renderFilms();
 renderHotels();
 renderTravel();
 renderLifestyle();
