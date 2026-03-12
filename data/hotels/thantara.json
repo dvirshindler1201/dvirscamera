@@ -1,5 +1,4 @@
 {
-  "id": "thantara",
   "name": "Thantara Resort",
   "location": "Chiang Mai, Thailand",
   "photos": [
@@ -20,6 +19,43 @@
       "caption": "The Grounds",
       "tag": "Chiang Mai, Thailand",
       "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DSC05761.jpg",
+      "caption": "View from the Bed",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DSC05773.jpg",
+      "caption": "Bedside",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DSC05796.webp",
+      "caption": "Poolside",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DSC05829.jpg",
+      "caption": "The Royal Bath",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DSC05867.jpg",
+      "caption": "Snacks",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/thantara/DJI_20251015104427_0205_D.webp",
+      "caption": "Lone",
+      "tag": "Chiang Mai, Thailand",
+      "orientation": "landscape"
     }
-  ]
+  ],
+  "id": "thantara"
 }
