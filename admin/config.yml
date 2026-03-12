@@ -198,7 +198,8 @@ collections:
                 widget: "select"
                 options: ["landscape", "portrait"]
                 default: "landscape"
-                - name: "hotel-films"
+
+  - name: "hotel-films"
     label: "🎬 Hotel Films"
     files:
       - name: "hotel-films"
