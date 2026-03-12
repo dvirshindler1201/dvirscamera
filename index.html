@@ -840,12 +840,8 @@ async function renderFilms() {
 
   container.innerHTML = '';
 
-  async function getVimeoThumb(vimeoId) {
-    try {
-      const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${vimeoId}`);
-      const data = await res.json();
-      return data.thumbnail_url_with_play_button || data.thumbnail_url || null;
-    } catch { return null; }
+  function getVimeoThumb(vimeoId) {
+    return `https://vumbnail.com/${vimeoId}.jpg`;
   }
 
   async function buildFilmsSection(title, films) {
@@ -857,7 +853,7 @@ async function renderFilms() {
     grid.className = 'films-grid';
 
     await Promise.all(films.map(async film => {
-      const thumb = await getVimeoThumb(film.vimeoId);
+      const thumb = getVimeoThumb(film.vimeoId);
       const card = document.createElement('div');
       card.className = 'film-card';
       card.innerHTML = `
