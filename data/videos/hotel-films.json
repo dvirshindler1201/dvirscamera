@@ -13,19 +13,16 @@
       "location": "Bangkok, Thailand"
     },
     {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "vimeoId": "1172877780",
+      "thumbnail": "/assets/images/thumb (2).jpg",
       "title": "Ban Sainai Resort",
       "location": "Krabi, Thailand"
     },
     {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "vimeoId": "1172878666",
+      "thumbnail": "/assets/images/thumb (3).jpg",
       "title": "Thantara Resort",
       "location": "Chiang Mai, Thailand"
-    },
-    {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Moxy Bangkok",
-      "location": "Bangkok, Thailand"
     }
   ]
 }
