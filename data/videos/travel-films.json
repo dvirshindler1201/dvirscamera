@@ -1,29 +1,10 @@
 {
   "films": [
     {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Thailand — Golden Hour",
+      "vimeoId": "1172880055",
+      "thumbnail": "/assets/images/DJI_20250719162932_0005_D.jpg",
+      "title": "The Art of Colour Grading",
       "location": "Thailand"
-    },
-    {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Travel Film 2",
-      "location": "Location"
-    },
-    {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Travel Film 3",
-      "location": "Location"
-    },
-    {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Travel Film 4",
-      "location": "Location"
-    },
-    {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
-      "title": "Travel Film 5",
-      "location": "Location"
     }
   ]
 }
