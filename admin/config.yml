@@ -198,3 +198,48 @@ collections:
                 widget: "select"
                 options: ["landscape", "portrait"]
                 default: "landscape"
+                - name: "hotel-films"
+    label: "🎬 Hotel Films"
+    files:
+      - name: "hotel-films"
+        label: "Hotel Films"
+        file: "data/videos/hotel-films.json"
+        fields:
+          - label: "Films"
+            name: "films"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Vimeo ID"
+                name: "vimeoId"
+                widget: "string"
+                hint: "The number from your Vimeo URL — e.g. vimeo.com/123456789"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+
+  - name: "travel-films"
+    label: "✈️ Travel Films"
+    files:
+      - name: "travel-films"
+        label: "Travel Films"
+        file: "data/videos/travel-films.json"
+        fields:
+          - label: "Films"
+            name: "films"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Vimeo ID"
+                name: "vimeoId"
+                widget: "string"
+                hint: "The number from your Vimeo URL — e.g. vimeo.com/123456789"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
