@@ -1,12 +1,14 @@
 {
   "films": [
     {
-      "vimeoId": "REPLACE_WITH_VIMEO_ID",
+      "vimeoId": "1172876704",
+      "thumbnail": "/assets/images/DJI_20250808194107_0078_D.jpg",
       "title": "500Rai Floating Resort",
       "location": "Khao Sok, Thailand"
     },
     {
       "vimeoId": "1172855643",
+      "thumbnail": "/assets/images/thumb.jpg",
       "title": "Grand Hyatt Erawan Bangkok",
       "location": "Bangkok, Thailand"
     },
