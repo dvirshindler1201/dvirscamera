@@ -1,5 +1,4 @@
 {
-  "id": "moxy",
   "name": "Moxy by Marriott",
   "location": "Bangkok, Thailand",
   "photos": [
@@ -20,6 +19,31 @@
       "caption": "The Room",
       "tag": "Bangkok, Thailand",
       "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/DSC04643.jpg",
+      "caption": "Desert",
+      "tag": "Bangkok, Thailand",
+      "orientation": "landscape"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/DSC04601.jpg",
+      "caption": "Fashion Stairs",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/DSC04618.jpg",
+      "caption": "Vibes",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
+    },
+    {
+      "src": "/assets/images/hotels/moxy/DSC04628.jpg",
+      "caption": "Vintage",
+      "tag": "Bangkok, Thailand",
+      "orientation": "portrait"
     }
-  ]
+  ],
+  "id": "moxy"
 }
