@@ -99,16 +99,7 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/IMG_5744.jpg",
-      "title": "Blanc",
-      "series": "adventure",
-      "country": "NEPAL",
-      "year": 2024,
-      "orientation": "portrait",
-      "sold": false
-    },
-    {
-      "src": "/assets/images/prints/adventure/nepal-flag.jpg",
+      "src": "/assets/images/prints/adventure.webp",
       "title": "Summit Banner",
       "series": "adventure",
       "country": "NEPAL",
@@ -117,7 +108,7 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/adventure/sri-lanka-mountain.jpg",
+      "src": "/assets/images/prints/IMG_4319.jpg",
       "title": "Ceylon Heights",
       "series": "adventure",
       "country": "SRI LANKA",
