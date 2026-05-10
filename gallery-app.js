@@ -22,6 +22,15 @@ const getCode = (photos, photo) => {
   return (SERIES_CODE[photo.series] || photo.series[0].toUpperCase()) + String(i + 1).padStart(2, "0");
 };
 
+const shuffleArray = arr => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
 function Grain() {
   return e("div", { className: "grain", "aria-hidden": "true" });
 }
@@ -128,7 +137,7 @@ function ThreeDoors({ series, photos, onEnter }) {
   return e("section", { className: "doors" },
     doors,
     e("div", { className: cn("doors-hint", hint && "doors-hint--show") },
-      "↓   SCROLL TO WALK THE GALLERY"
+      "↓   SCROLL FOR THE COMPLETE ARCHIVE"
     )
   );
 }
@@ -481,42 +490,152 @@ function CustomCursor() {
   );
 }
 
-function CompleteGallery({ series, photos, onPickPhoto }) {
-  return e("section", { className: "complete-gallery" },
-    e("div", { className: "cg-header" },
-      e("div", { className: "cg-eyebrow" }, "COMPLETE COLLECTION"),
-      e("h2", { className: "cg-title" }, "All " + photos.length + " Prints"),
-      e("p", { className: "cg-subtitle" }, "Browse the full archive. Click any print to order.")
+function AllGalleryWalk({ photos, allPhotos, series, onPickPhoto, onEnterSeries }) {
+  const trackRef = useRef(null);
+  const [progress, setProgress] = useState({ idx: 1, total: photos.length });
+  const [reduced, setReduced]   = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    if (mq.addEventListener) mq.addEventListener("change", () => setReduced(mq.matches));
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el || reduced) return;
+    let vel = 0, rafId;
+    const decay = 0.88;
+    const animate = () => {
+      if (Math.abs(vel) > 0.3) { el.scrollLeft += vel; vel *= decay; rafId = requestAnimationFrame(animate); }
+      else vel = 0;
+    };
+    const onWheel = ev => {
+      if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX)) {
+        ev.preventDefault();
+        vel += ev.deltaY * 1.2;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => { el.removeEventListener("wheel", onWheel); cancelAnimationFrame(rafId); };
+  }, [reduced]);
+
+  useEffect(() => {
+    const onKey = ev => {
+      if (!trackRef.current) return;
+      if (ev.key === "ArrowRight") trackRef.current.scrollBy({ left:  window.innerWidth * 0.5, behavior: "smooth" });
+      if (ev.key === "ArrowLeft")  trackRef.current.scrollBy({ left: -window.innerWidth * 0.5, behavior: "smooth" });
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const items = Array.from(el.querySelectorAll(".walk-item"));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add("walk-item--in");
+          const i = Number(en.target.dataset.idx);
+          setProgress(p => ({ ...p, idx: Math.max(p.idx, i + 1) }));
+        }
+      });
+    }, { root: el, threshold: 0.4 });
+    items.forEach((it, i) => { it.style.transitionDelay = (i % 6) * 60 + "ms"; obs.observe(it); });
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (trackRef.current) trackRef.current.scrollTo({ left: 0, behavior: "auto" });
+    setProgress({ idx: 1, total: photos.length });
+  }, [photos.length]);
+
+  return e("section", { className: "walk" },
+    e("aside", { className: "walk-rail" },
+      e("div", { className: "rail-row rail-row--active" },
+        e("span", { className: "rail-dot" }),
+        e("span", { className: "rail-name" }, "The Archive"),
+        e("span", { className: "rail-count" },
+          String(progress.idx).padStart(2, "0") + " / " + String(photos.length).padStart(2, "0")
+        )
+      ),
+      series.map(s =>
+        e("button", { key: s.id, className: "rail-row rail-row--other", onClick: () => onEnterSeries(s.id) },
+          e("span", { className: "rail-dot rail-dot--ghost" }),
+          e("span", { className: "rail-name" }, s.name)
+        )
+      )
     ),
-    series.map(s => {
-      const seriesPhotos = photosOf(photos, s.id);
-      const code = SERIES_CODE[s.id] || s.id[0].toUpperCase();
-      return e("div", { key: s.id, className: "cg-series" },
-        e("div", { className: "cg-series-header" },
-          e("span", { className: "cg-series-badge" }, code),
-          e("span", { className: "cg-series-name" }, s.name),
-          e("span", { className: "cg-series-count" }, seriesPhotos.length + " prints")
-        ),
-        e("div", { className: "cg-grid" },
-          seriesPhotos.map((p, i) =>
-            e("button", {
-              key: p.src,
-              className: cn("cg-item", "cg-item--" + p.orientation, p.sold && "cg-item--sold"),
-              onClick: () => onPickPhoto(p)
-            },
-              e("img", { src: p.src, alt: p.title, loading: "lazy", draggable: "false" }),
-              e("div", { className: "photo-shield" }),
-              p.sold ? e("span", { className: "cg-sold-badge" }, "SOLD") : null,
-              e("div", { className: "cg-overlay" },
-                e("span", { className: "cg-code" }, code + String(i + 1).padStart(2, "0")),
-                e("span", { className: "cg-item-title" }, p.title)
-              )
+    e("div", { className: "walk-room-label" },
+      "THE ARCHIVE  \xb7  ALL " + photos.length + " PRINTS  \xb7  RANDOMIZED"
+    ),
+    e("div", { className: "walk-hint" }, "↔   scroll horizontally"),
+    e("div", { className: "walk-track", ref: trackRef },
+      e("div", { className: "walk-opener" },
+        e("div", { className: "walk-opener-num" }, "THE ARCHIVE"),
+        e("div", { className: "walk-opener-name" }, "All Prints"),
+        e("div", { className: "walk-opener-line" }),
+        e("div", { className: "walk-opener-blurb" }, "Every photograph from Adventure, Escape, and Story — shuffled."),
+        e("div", { className: "walk-opener-meta" }, "NEPAL \xb7 THAILAND \xb7 SRI LANKA \xb7 ISRAEL")
+      ),
+      photos.map((p, i) => {
+        const code = getCode(allPhotos, p);
+        return e("div", {
+          key: p.src + i,
+          className: cn("walk-item", "walk-item--" + p.orientation),
+          "data-idx": i
+        },
+          e("button", {
+            className: cn("walk-photo", p.sold && "walk-photo--sold"),
+            onClick: () => onPickPhoto(p)
+          },
+            e("img", { src: p.src, alt: p.title, loading: "lazy", draggable: "false" }),
+            p.sold ? e("span", { className: "sold-overlay" }, "SOLD") : null,
+            e("div", { className: "photo-shield" })
+          ),
+          e("div", { className: "placard" },
+            e("span", { className: "placard-code" }, code),
+            e("div", { className: cn("placard-title", p.sold && "placard-title--sold") }, p.title),
+            e("div", { className: "placard-meta" }, p.year + (p.country ? " \xb7 " + p.country : "")),
+            e("button", { className: "placard-link", onClick: () => onPickPhoto(p) },
+              p.sold ? "Sold \xb7 edition closed" : "View print →"
+            )
+          ),
+          e("div", { className: "walk-num" },
+            "№ " + String(i + 1).padStart(2, "0") + " / " + String(photos.length).padStart(2, "0")
+          )
+        );
+      }),
+      e("div", { className: "walk-end" },
+        e("div", { className: "walk-end-eyebrow" }, "END OF"),
+        e("div", { className: "walk-end-name" }, "The Archive"),
+        e("div", { className: "walk-end-rule" }),
+        e("div", { className: "walk-end-doors" },
+          series.map((s, i) =>
+            e("button", { key: s.id, className: "walk-end-door", onClick: () => onEnterSeries(s.id) },
+              e("span", { className: "walk-end-arrow" }, i === 0 ? "←" : "→"),
+              e("span", { className: "walk-end-door-name" }, s.name),
+              e("span", { className: "walk-end-door-meta" }, photosOf(allPhotos, s.id).length + " prints")
             )
           )
         )
-      );
-    }),
-    e(AboutFooter, null)
+      )
+    ),
+    e("div", { className: "walk-progress" },
+      e("div", { className: "walk-progress-num" },
+        String(progress.idx).padStart(2, "0") + " / " + String(photos.length).padStart(2, "0")
+      ),
+      e("div", { className: "walk-progress-track" },
+        e("div", {
+          className: "walk-progress-fill",
+          style: { width: ((progress.idx / photos.length) * 100) + "%" }
+        })
+      )
+    )
   );
 }
 
@@ -525,22 +644,47 @@ function App() {
   const [phase, setPhase]       = useState("doors");
   const [seriesId, setSeriesId] = useState(null);
   const [lightbox, setLightbox] = useState(null);
+  const [veil, setVeil]         = useState(false);
+  const [shuffled, setShuffled] = useState([]);
 
   useEffect(() => {
     fetch("/data/prints.json")
       .then(r => r.json())
       .then(d => {
         setData(d);
+        setShuffled(shuffleArray(d.photos));
         const b = document.getElementById("boot");
         if (b) { b.classList.add("boot--gone"); setTimeout(() => b.remove(), 800); }
       });
   }, []);
 
+  // Scroll down on landing → white fade → archive walk
+  useEffect(() => {
+    if (phase !== "doors") return;
+    let triggered = false;
+    const onScroll = () => {
+      if (triggered || window.scrollY < 60) return;
+      triggered = true;
+      setVeil(true);
+      setTimeout(() => {
+        setPhase("all");
+        history.pushState({ phase: "all" }, "", "#all");
+        window.scrollTo({ top: 0, behavior: "auto" });
+        setVeil(false);
+      }, 380);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [phase]);
+
+  // Browser back button
   useEffect(() => {
     const onPop = () => {
       const hash = window.location.hash.replace("#", "");
       if (!hash) {
         setPhase("doors"); setSeriesId(null); setLightbox(null);
+      } else if (hash === "all") {
+        setPhase("all"); setSeriesId(null); setLightbox(null);
       } else if (["adventure", "escape", "story"].includes(hash)) {
         setSeriesId(hash); setPhase("walk"); setLightbox(null);
       }
@@ -566,18 +710,12 @@ function App() {
     e(Grain, null),
     e(CustomCursor, null),
     e(TopBar, { onHome: goHome }),
-    phase === "doors" ? e(React.Fragment, null,
-      e(ThreeDoors, {
-        series: data.series,
-        photos: data.photos,
-        onEnter: enterSeries
-      }),
-      e(CompleteGallery, {
-        series: data.series,
-        photos: data.photos,
-        onPickPhoto: p => setLightbox(p)
-      })
-    ) : null,
+    e("div", { className: cn("veil", veil && "veil--on") }),
+    phase === "doors" ? e(ThreeDoors, {
+      series: data.series,
+      photos: data.photos,
+      onEnter: enterSeries
+    }) : null,
     phase === "walk" && seriesId ? e(React.Fragment, null,
       e(GalleryWalk, {
         seriesId,
@@ -586,6 +724,16 @@ function App() {
         onPickPhoto: p => setLightbox(p),
         onSwitchSeries: id => enterSeries(id),
         onJumpSeries: id => enterSeries(id)
+      }),
+      e(AboutFooter, null)
+    ) : null,
+    phase === "all" ? e(React.Fragment, null,
+      e(AllGalleryWalk, {
+        photos: shuffled,
+        allPhotos: data.photos,
+        series: data.series,
+        onPickPhoto: p => setLightbox(p),
+        onEnterSeries: id => enterSeries(id)
       }),
       e(AboutFooter, null)
     ) : null,
