@@ -3,10 +3,10 @@ const { useState, useEffect, useRef, useMemo } = React;
 const e = React.createElement;
 
 const SIZES = [
-  { label: "21 \xd7 30 CM",  price: 150 },
-  { label: "30 \xd7 40 CM",  price: 240 },
-  { label: "50 \xd7 70 CM",  price: 360 },
-  { label: "70 \xd7 100 CM", price: 690 },
+  { label: "21 \xd7 30 CM",  price: 150, w: 21, h: 30  },
+  { label: "30 \xd7 40 CM",  price: 240, w: 30, h: 40  },
+  { label: "50 \xd7 70 CM",  price: 360, w: 50, h: 70  },
+  { label: "70 \xd7 100 CM", price: 690, w: 70, h: 100 },
 ];
 
 const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScQJk177SkQuVrCWkcG29DllBctvYI1D_Na6PrVDUDuiTzxig/formResponse";
@@ -650,12 +650,18 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
   const [specialRequests, setSpecialRequests]  = useState("");
   const [phase,           setPhase]            = useState("form"); // "form"|"submitting"|"success"
 
-  const photoCode = getCode(allPhotos, photo);
-  const size      = SIZES[sizeIdx];
-  const series    = seriesById(allSeries, photo.series);
-  const bitUrl    = BIT_BASE + "?amount=" + size.price;
-  const qrSrc     = "https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl="
-                  + encodeURIComponent(bitUrl) + "&chld=M|2";
+  const photoCode  = getCode(allPhotos, photo);
+  const size       = SIZES[sizeIdx];
+  const series     = seriesById(allSeries, photo.series);
+  const borderCm   = size.h / 20;
+  const borderCmStr = (borderCm % 1 === 0 ? borderCm.toFixed(0) : borderCm.toFixed(1));
+  const dominant   = photo.orientation === "landscape" ? size.h : size.w;
+  const borderPct  = ((borderCm / dominant) * 100).toFixed(2) + "%";
+  const bitUrl     = BIT_BASE + "?amount=" + size.price;
+  const qrSrc      = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data="
+                   + encodeURIComponent(bitUrl);
+  const isMobile   = typeof navigator !== "undefined"
+                   && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   useEffect(() => {
     const onKey = ev => { if (ev.key === "Escape") onClose(); };
@@ -673,7 +679,7 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
       "entry.744807541":  phone,
       "entry.1021879545": photoCode,
       "entry.100017642":  size.label,
-      "entry.775421455":  whiteBorder ? "Yes" : "No",
+      "entry.775421455":  whiteBorder ? ("Yes, " + borderCmStr + "cm") : "No",
       "entry.1054355136": specialRequests,
       "entry.1054355136_sentinel": "",
       "entry.511285212_sentinel":  "",
@@ -701,20 +707,24 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
         e("div", { className: "of-payment" },
           e("div", { className: "of-payment-eyebrow" }, "PAYMENT \xb7 ₪" + size.price),
           e("div", { className: "of-qr-wrap" },
-            e("img", { src: qrSrc, alt: "Scan to pay via Bit", width: 220, height: 220 })
+            e("img", { src: qrSrc, alt: "Scan to pay via Bit", width: 240, height: 240 })
           ),
           e("p", { className: "of-qr-hint" },
-            "Scan with your phone to pay ₪" + size.price + " via Bit"
+            isMobile
+              ? "Tap below to open Bit and pay ₪" + size.price
+              : "Bit works on mobile only \xb7 scan the QR with your phone to pay ₪" + size.price
           ),
-          e("a", {
-            className: "of-bit-btn",
-            href: bitUrl,
-            target: "_blank",
-            rel: "noopener noreferrer"
-          },
-            "Open Bit ",
-            e("span", { className: "arrow" }, "↗")
-          )
+          isMobile
+            ? e("a", {
+                className: "of-bit-btn",
+                href: bitUrl,
+                target: "_blank",
+                rel: "noopener noreferrer"
+              },
+                "Open Bit ",
+                e("span", { className: "arrow" }, "↗")
+              )
+            : null
         )
       )
     );
@@ -727,7 +737,7 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
     ),
 
     e("div", { className: "of-photo-panel" },
-      e("div", { className: cn("of-photo-mat", whiteBorder && "of-photo-mat--bordered") },
+      e("div", { className: cn("of-photo-mat", whiteBorder && "of-photo-mat--bordered"), style: { "--border-pct": borderPct } },
         e("img", { src: photo.src, alt: photo.title, draggable: "false" }),
         e("div", { className: "photo-shield" })
       ),
