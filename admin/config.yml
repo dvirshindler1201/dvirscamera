@@ -252,3 +252,61 @@ collections:
               - label: "Location"
                 name: "location"
                 widget: "string"
+
+  - name: "prints"
+    label: "🖼️ Prints Gallery"
+    files:
+      - name: "prints"
+        label: "Prints Gallery"
+        file: "data/prints.json"
+        fields:
+          - label: "Series"
+            name: "series"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "ID (adventure / escape / story)", name: "id", widget: "string"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Blurb", name: "blurb", widget: "string"}
+              - {label: "Countries", name: "countries", widget: "string"}
+              - label: "Hero Image"
+                name: "hero"
+                widget: "image"
+                media_folder: "/assets/images/prints"
+                public_folder: "/assets/images/prints"
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.series}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/prints"
+                public_folder: "/assets/images/prints"
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "Series"
+                name: "series"
+                widget: "select"
+                options:
+                  - {label: "Adventure", value: "adventure"}
+                  - {label: "Escape", value: "escape"}
+                  - {label: "Story", value: "story"}
+              - {label: "Country", name: "country", widget: "string", required: false}
+              - {label: "Year", name: "year", widget: "number", default: 2025}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+                default: "landscape"
+              - label: "Sold Out"
+                name: "sold"
+                widget: "boolean"
+                default: false
+          - label: "Sizes & Prices"
+            name: "sizes"
+            widget: "list"
+            summary: "{{fields.label}} — ₪{{fields.price}}"
+            fields:
+              - {label: "Size Label", name: "label", widget: "string"}
+              - {label: "Price (₪)", name: "price", widget: "number"}
