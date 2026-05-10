@@ -5,24 +5,24 @@
       "name": "Adventure",
       "blurb": "Dramatic landscapes, motion, scale.",
       "countries": "NEPAL · THAILAND · ISRAEL",
-      "hero": "/assets/images/prints/heroes/adventure.jpg",
-      "heroBlur": "/assets/images/prints/heroes/adventure-blur.jpg"
+      "hero": "/assets/images/adventure.webp",
+      "heroBlur": "/assets/images/adventure-blur.jpg"
     },
     {
       "id": "escape",
       "name": "Escape",
       "blurb": "Calm, solitary, breathing room.",
       "countries": "ISRAEL · SRI LANKA · THAILAND",
-      "hero": "/assets/images/prints/heroes/escape.jpg",
-      "heroBlur": "/assets/images/prints/heroes/escape-blur.jpg"
+      "hero": "/assets/images/escape.webp",
+      "heroBlur": "/assets/images/escape-blur.jpg"
     },
     {
       "id": "story",
       "name": "Story",
       "blurb": "Human moments, character.",
       "countries": "SRI LANKA · NEPAL · ISRAEL",
-      "hero": "/assets/images/prints/heroes/story.jpg",
-      "heroBlur": "/assets/images/prints/heroes/story-blur.jpg"
+      "hero": "/assets/images/story.webp",
+      "heroBlur": "/assets/images/story-blur.jpg"
     }
   ],
   "photos": [
