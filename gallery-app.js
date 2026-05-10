@@ -644,7 +644,7 @@ function App() {
   const [phase, setPhase]       = useState("doors");
   const [seriesId, setSeriesId] = useState(null);
   const [lightbox, setLightbox] = useState(null);
-  const [veil, setVeil]         = useState(false);
+  const [veil, setVeil]         = useState(null); // null | "in" | "out"
   const [shuffled, setShuffled] = useState([]);
 
   useEffect(() => {
@@ -658,23 +658,37 @@ function App() {
       });
   }, []);
 
-  // Scroll down on landing → white fade → archive walk
+  // Wheel/swipe down on landing → white fade → archive walk
   useEffect(() => {
     if (phase !== "doors") return;
     let triggered = false;
-    const onScroll = () => {
-      if (triggered || window.scrollY < 60) return;
+    let touchStartY = 0;
+
+    const trigger = () => {
+      if (triggered) return;
       triggered = true;
-      setVeil(true);
+      setVeil("in");
       setTimeout(() => {
         setPhase("all");
         history.pushState({ phase: "all" }, "", "#all");
         window.scrollTo({ top: 0, behavior: "auto" });
-        setVeil(false);
+        setVeil("out");
+        setTimeout(() => setVeil(null), 380);
       }, 380);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const onWheel      = ev => { if (ev.deltaY > 30) trigger(); };
+    const onTouchStart = ev => { touchStartY = ev.touches[0].clientY; };
+    const onTouchEnd   = ev => { if (touchStartY - ev.changedTouches[0].clientY > 50) trigger(); };
+
+    window.addEventListener("wheel",      onWheel,      { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    return () => {
+      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend",   onTouchEnd);
+    };
   }, [phase]);
 
   // Browser back button
@@ -710,7 +724,7 @@ function App() {
     e(Grain, null),
     e(CustomCursor, null),
     e(TopBar, { onHome: goHome }),
-    e("div", { className: cn("veil", veil && "veil--on") }),
+    veil ? e("div", { className: "veil veil--" + veil }) : null,
     phase === "doors" ? e(ThreeDoors, {
       series: data.series,
       photos: data.photos,
