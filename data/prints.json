@@ -29,7 +29,7 @@
     {
       "src": "/assets/images/prints/Israel - Chill.webp",
       "title": "Slow Down",
-      "series": "adventure",
+      "series": "story",
       "country": "ISRAEL",
       "year": 2025,
       "orientation": "portrait",
@@ -38,7 +38,7 @@
     {
       "src": "/assets/images/prints/Israel - Desert.webp",
       "title": "Dust and Gold",
-      "series": "adventure",
+      "series": "escape",
       "country": "ISRAEL",
       "year": 2025,
       "orientation": "landscape",
@@ -56,7 +56,7 @@
     {
       "src": "/assets/images/prints/Nepal - Bridge.jpg",
       "title": "The Crossing",
-      "series": "adventure",
+      "series": "story",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "portrait",
@@ -65,7 +65,7 @@
     {
       "src": "/assets/images/prints/IMG_5723.jpg",
       "title": "Wind Colors",
-      "series": "adventure",
+      "series": "escape",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "portrait",
@@ -110,7 +110,7 @@
     {
       "src": "/assets/images/prints/IMG_4319-1.jpg",
       "title": "Ceylon Heights",
-      "series": "adventure",
+      "series": "story",
       "country": "SRI LANKA",
       "year": 2024,
       "orientation": "landscape",
@@ -119,7 +119,7 @@
     {
       "src": "/assets/images/prints/Thailand - Bamboo Bridge.jpg",
       "title": "Between Banks",
-      "series": "adventure",
+      "series": "escape",
       "country": "THAILAND",
       "year": 2025,
       "orientation": "landscape",
@@ -128,7 +128,7 @@
     {
       "src": "/assets/images/prints/Thailand - Boats.jpg",
       "title": "Before the Tide",
-      "series": "adventure",
+      "series": "escape",
       "country": "THAILAND",
       "year": 2025,
       "orientation": "landscape",
@@ -137,7 +137,7 @@
     {
       "src": "/assets/images/prints/Thailand - Jungle.jpg",
       "title": "The Canopy",
-      "series": "adventure",
+      "series": "escape",
       "country": "THAILAND",
       "year": 2025,
       "orientation": "landscape",
@@ -146,7 +146,7 @@
     {
       "src": "/assets/images/prints/Israel - Lone Girl.jpg",
       "title": "Solitude",
-      "series": "escape",
+      "series": "story",
       "country": "ISRAEL",
       "year": 2025,
       "orientation": "landscape",
@@ -164,7 +164,7 @@
     {
       "src": "/assets/images/prints/IMG_5674.jpg",
       "title": "Cloud Nine",
-      "series": "escape",
+      "series": "adventure",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "landscape",
@@ -173,7 +173,7 @@
     {
       "src": "/assets/images/prints/IMG_5762.jpg",
       "title": "Trail Companions",
-      "series": "escape",
+      "series": "story",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "landscape",
@@ -182,7 +182,7 @@
     {
       "src": "/assets/images/prints/IMG_5783.jpg",
       "title": "Free Spirit",
-      "series": "escape",
+      "series": "story",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "portrait",
@@ -191,7 +191,7 @@
     {
       "src": "/assets/images/prints/IMG_5692.jpg",
       "title": "Red in the Mountains",
-      "series": "escape",
+      "series": "story",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "portrait",
@@ -200,7 +200,7 @@
     {
       "src": "/assets/images/prints/IMG_5737.jpg",
       "title": "First Light",
-      "series": "escape",
+      "series": "adventure",
       "country": "NEPAL",
       "year": 2024,
       "orientation": "landscape",
@@ -218,7 +218,7 @@
     {
       "src": "/assets/images/prints/IMG_4100.jpg",
       "title": "In Motion",
-      "series": "escape",
+      "series": "story",
       "country": "SRI LANKA",
       "year": 2024,
       "orientation": "landscape",
@@ -227,7 +227,7 @@
     {
       "src": "/assets/images/prints/DJI_20250719203818_0019_D.jpg",
       "title": "Still Waters",
-      "series": "escape",
+      "series": "adventure",
       "country": "THAILAND",
       "year": 2025,
       "orientation": "landscape",
@@ -236,7 +236,7 @@
     {
       "src": "/assets/images/prints/DJI_20250719162932_0005_D.jpg",
       "title": "Into the Lagoon",
-      "series": "escape",
+      "series": "story",
       "country": "THAILAND",
       "year": 2025,
       "orientation": "landscape",
@@ -281,7 +281,7 @@
     {
       "src": "/assets/images/prints/Israel - Barrels.jpg",
       "title": "Aged",
-      "series": "story",
+      "series": "escape",
       "country": "ISRAEL",
       "year": 2025,
       "orientation": "landscape",
@@ -299,7 +299,7 @@
     {
       "src": "/assets/images/prints/Nepal - Flags 7x10-1.jpg",
       "title": "The Gilded Hour",
-      "series": "story",
+      "series": "escape",
       "country": "Thailand",
       "year": 2025,
       "orientation": "landscape",
@@ -344,7 +344,7 @@
     {
       "src": "/assets/images/prints/IMG_4696.jpg",
       "title": "The Break",
-      "series": "story",
+      "series": "adventure",
       "country": "SRI LANKA",
       "year": 2024,
       "orientation": "landscape",
