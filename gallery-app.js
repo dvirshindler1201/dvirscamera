@@ -47,6 +47,29 @@ function Typewriter({ text, delay = 0, speed = 80 }) {
   return e("span", null, text.slice(0, n), e("span", { className: "caret" }));
 }
 
+function DoorImage({ src, blurSrc, alt, eager }) {
+  const [loaded, setLoaded] = useState(false);
+  return e(React.Fragment, null,
+    blurSrc ? e("img", {
+      className: "door-blur",
+      src: blurSrc,
+      alt: "",
+      "aria-hidden": "true",
+      draggable: "false"
+    }) : null,
+    e("img", {
+      className: cn("door-img", loaded && "door-img--loaded"),
+      src,
+      alt,
+      draggable: "false",
+      loading: "eager",
+      decoding: "async",
+      fetchpriority: eager ? "high" : "auto",
+      onLoad: () => setLoaded(true)
+    })
+  );
+}
+
 function ThreeDoors({ series, photos, onEnter }) {
   const [hover, setHover] = useState(null);
   const [hint, setHint]   = useState(false);
@@ -66,10 +89,16 @@ function ThreeDoors({ series, photos, onEnter }) {
       className: cn("door", isHover && "door--hover", dim && "door--dim"),
       onMouseEnter: () => setHover(s.id),
       onMouseLeave: () => setHover(null),
-      onClick: () => onEnter(s.id),
-      style: { "--door-img": "url(" + s.hero + ")" }
+      onClick: () => onEnter(s.id)
     },
-      e("div", { className: "door-img" }),
+      e("div", { className: "door-img-wrap" },
+        e(DoorImage, {
+          src: s.hero,
+          blurSrc: s.heroBlur,
+          alt: s.name,
+          eager: i === 0
+        })
+      ),
       e("div", { className: "door-veil" }),
       e("div", { className: "door-text" },
         e("span", { className: "door-num" }, String(i + 1).padStart(2, "0") + " / 03"),
