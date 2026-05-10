@@ -261,17 +261,17 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/bloom.jpg",
+      "src": "/assets/images/prints/Bloom.jpg",
       "title": "Bloom",
       "series": "story",
       "country": "ISRAEL",
-      "year": 2024,
+      "year": 2025,
       "orientation": "portrait",
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/hooping-nowhere.jpg",
-      "title": "Lost in the Circle",
+      "src": "/assets/images/prints/IMG_5574.jpg",
+      "title": "Hooping Nowhere",
       "series": "story",
       "country": "NEPAL",
       "year": 2024,
@@ -279,25 +279,16 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/img-4100.jpg",
-      "title": "Untitled",
-      "series": "story",
-      "country": "",
-      "year": 2024,
-      "orientation": "landscape",
-      "sold": false
-    },
-    {
-      "src": "/assets/images/prints/story/israel-barrels.jpg",
+      "src": "/assets/images/prints/Israel - Barrels.jpg",
       "title": "Aged",
       "series": "story",
       "country": "ISRAEL",
-      "year": 2024,
+      "year": 2025,
       "orientation": "landscape",
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/israel-soldiers.jpg",
+      "src": "/assets/images/prints/Israel - Soldiers.jpg",
       "title": "Standing Watch",
       "series": "story",
       "country": "ISRAEL",
