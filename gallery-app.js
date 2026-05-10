@@ -9,7 +9,8 @@ const SIZES = [
   { label: "70 \xd7 100 CM", price: 690 },
 ];
 
-const ORDER_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScQJk177SkQuVrCWkcG29DllBctvYI1D_Na6PrVDUDuiTzxig/viewform?usp=pp_url";
+const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScQJk177SkQuVrCWkcG29DllBctvYI1D_Na6PrVDUDuiTzxig/formResponse";
+const BIT_BASE    = "https://www.bitpay.co.il/app/me/C2EE9C41-8846-5F01-BECB-DFB850342E76EDDC";
 
 const cn = (...xs) => xs.filter(Boolean).join(" ");
 const seriesById = (list, id) => list.find(s => s.id === id);
@@ -308,7 +309,7 @@ function GalleryWalk({ seriesId, series, photos, onPickPhoto, onSwitchSeries, on
   );
 }
 
-function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto }) {
+function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto, onOrder }) {
   const [size, setSize]       = useState(1);
   const [focused, setFocused] = useState(false);
 
@@ -340,10 +341,6 @@ function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto }) {
   const series   = seriesById(allSeries, photo.series);
   const cur      = SIZES[size];
   const photoCode = getCode(allPhotos, photo);
-
-  const formUrl = ORDER_FORM
-    + "&entry.1=" + encodeURIComponent(photo.title + " [" + photoCode + "]")
-    + "&entry.2=" + encodeURIComponent(cur.label);
 
   return e("div", { className: "lightbox" },
     e("button", { className: "lightbox-bg", onClick: onClose, "aria-label": "Close" }),
@@ -416,16 +413,14 @@ function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto }) {
           "UNFRAMED \xb7 ARCHIVAL FINE-ART PAPER \xb7 SIGNED BY THE ARTIST"
         )
       ),
-      e("a", {
+      e("button", {
         className: "order-btn",
-        href: formUrl,
-        target: "_blank",
-        rel: "noopener noreferrer"
+        onClick: () => onOrder(photo, size)
       },
         e("span", { className: "order-btn-label" }, "Order print"),
         e("span", { className: "order-btn-meta" }, cur.label + " \xb7 ₪" + cur.price)
       ),
-      e("div", { className: "order-note" }, "PAYMENT VIA BIT AT END OF FORM")
+      e("div", { className: "order-note" }, "UNFRAMED · ARCHIVAL FINE-ART PAPER · SIGNED")
     )
   );
 }
@@ -639,11 +634,178 @@ function AllGalleryWalk({ photos, allPhotos, series, onPickPhoto, onEnterSeries 
   );
 }
 
+function OrderField({ label, children }) {
+  return e("div", { className: "of-field" },
+    e("label", { className: "of-label" }, label),
+    children
+  );
+}
+
+function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
+  const [firstName,       setFirstName]       = useState("");
+  const [lastName,        setLastName]         = useState("");
+  const [email,           setEmail]            = useState("");
+  const [phone,           setPhone]            = useState("");
+  const [whiteBorder,     setWhiteBorder]      = useState(false);
+  const [specialRequests, setSpecialRequests]  = useState("");
+  const [phase,           setPhase]            = useState("form"); // "form"|"submitting"|"success"
+
+  const photoCode = getCode(allPhotos, photo);
+  const size      = SIZES[sizeIdx];
+  const series    = seriesById(allSeries, photo.series);
+  const bitUrl    = BIT_BASE + "?amount=" + size.price;
+  const qrSrc     = "https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl="
+                  + encodeURIComponent(bitUrl) + "&chld=M|2";
+
+  useEffect(() => {
+    const onKey = ev => { if (ev.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    setPhase("submitting");
+    const body = new URLSearchParams({
+      "entry.1940650922": firstName,
+      "entry.1162546508": lastName,
+      "entry.1535148940": email,
+      "entry.744807541":  phone,
+      "entry.1021879545": photoCode,
+      "entry.100017642":  size.label,
+      "entry.775421455":  whiteBorder ? "Yes" : "No",
+      "entry.1054355136": specialRequests,
+      "entry.1054355136_sentinel": "",
+      "entry.511285212_sentinel":  "",
+    });
+    fetch(FORM_ACTION, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    }).finally(() => setPhase("success"));
+  };
+
+  if (phase === "success") {
+    return e("div", { className: "of-overlay" },
+      e("button", { className: "lb-close of-close", onClick: onClose },
+        e("span", { className: "lb-close-x" }, "\xd7"),
+        e("span", { className: "lb-close-label" }, "CLOSE")
+      ),
+      e("div", { className: "of-success" },
+        e("div", { className: "of-success-eyebrow" }, "ORDER CONFIRMED"),
+        e("h1", { className: "of-success-title" }, "Thank you."),
+        e("p", { className: "of-success-sub" },
+          "Your order for “" + photo.title + "” [" + photoCode + "] has been received. "
+          + "We’ll confirm by email within 24 hours."
+        ),
+        e("div", { className: "of-payment" },
+          e("div", { className: "of-payment-eyebrow" }, "PAYMENT \xb7 ₪" + size.price),
+          e("div", { className: "of-qr-wrap" },
+            e("img", { src: qrSrc, alt: "Scan to pay via Bit", width: 220, height: 220 })
+          ),
+          e("p", { className: "of-qr-hint" },
+            "Scan with your phone to pay ₪" + size.price + " via Bit"
+          ),
+          e("a", {
+            className: "of-bit-btn",
+            href: bitUrl,
+            target: "_blank",
+            rel: "noopener noreferrer"
+          },
+            "Open Bit ",
+            e("span", { className: "arrow" }, "↗")
+          )
+        )
+      )
+    );
+  }
+
+  return e("div", { className: "of-overlay" },
+    e("button", { className: "lb-close of-close", onClick: onClose },
+      e("span", { className: "lb-close-x" }, "\xd7"),
+      e("span", { className: "lb-close-label" }, "CLOSE")
+    ),
+
+    e("div", { className: "of-photo-panel" },
+      e("div", { className: cn("of-photo-mat", whiteBorder && "of-photo-mat--bordered") },
+        e("img", { src: photo.src, alt: photo.title, draggable: "false" }),
+        e("div", { className: "photo-shield" })
+      ),
+      e("div", { className: "of-photo-info" },
+        e("span", { className: "of-photo-code" }, photoCode),
+        e("span", { className: "of-photo-title" }, photo.title),
+        e("span", { className: "of-photo-size" }, size.label + " \xb7 ₪" + size.price)
+      )
+    ),
+
+    e("div", { className: "of-form-panel" },
+      e("div", { className: "of-header" },
+        e("div", { className: "of-eyebrow" }, "PLACE YOUR ORDER"),
+        e("h1", { className: "of-title" }, "Reserve this print.")
+      ),
+
+      e("form", { className: "of-fields", onSubmit: handleSubmit },
+        e("div", { className: "of-row" },
+          e(OrderField, { label: "First name" },
+            e("input", { className: "of-input", type: "text", required: true,
+              value: firstName, onChange: ev => setFirstName(ev.target.value) })
+          ),
+          e(OrderField, { label: "Last name" },
+            e("input", { className: "of-input", type: "text", required: true,
+              value: lastName, onChange: ev => setLastName(ev.target.value) })
+          )
+        ),
+        e(OrderField, { label: "Email" },
+          e("input", { className: "of-input", type: "email", required: true,
+            value: email, onChange: ev => setEmail(ev.target.value) })
+        ),
+        e(OrderField, { label: "Phone" },
+          e("input", { className: "of-input", type: "tel", required: true,
+            value: phone, onChange: ev => setPhone(ev.target.value) })
+        ),
+
+        e("div", { className: "of-field" },
+          e("label", { className: "of-label" }, "White border"),
+          e("div", { className: "of-toggle" },
+            e("button", { type: "button",
+              className: cn("of-toggle-btn", !whiteBorder && "of-toggle-btn--on"),
+              onClick: () => setWhiteBorder(false) }, "No"),
+            e("button", { type: "button",
+              className: cn("of-toggle-btn", whiteBorder && "of-toggle-btn--on"),
+              onClick: () => setWhiteBorder(true) }, "Yes")
+          ),
+          e("p", { className: "of-toggle-hint" },
+            whiteBorder
+              ? "White mat added — preview updated on the left"
+              : "Print fills the paper edge to edge"
+          )
+        ),
+
+        e(OrderField, { label: "Special requests" },
+          e("textarea", { className: "of-input of-textarea", rows: 3,
+            placeholder: "Anything we should know…",
+            value: specialRequests, onChange: ev => setSpecialRequests(ev.target.value) })
+        ),
+
+        e("button", { type: "submit", className: "of-submit", disabled: phase === "submitting" },
+          phase === "submitting"
+            ? "Sending…"
+            : e(React.Fragment, null,
+                e("span", { className: "order-btn-label" }, "Place order"),
+                e("span", { className: "order-btn-meta" }, size.label + " \xb7 ₪" + size.price)
+              )
+        )
+      )
+    )
+  );
+}
+
 function App() {
   const [data, setData]         = useState(null);
   const [phase, setPhase]       = useState("doors");
   const [seriesId, setSeriesId] = useState(null);
   const [lightbox, setLightbox] = useState(null);
+  const [order,    setOrder]    = useState(null); // { photo, sizeIdx }
   const [veil, setVeil]         = useState(null); // null | "in" | "out"
   const [shuffled, setShuffled] = useState([]);
 
@@ -756,7 +918,15 @@ function App() {
       allPhotos: data.photos,
       allSeries: data.series,
       onClose: () => setLightbox(null),
-      onPickPhoto: p => setLightbox(p)
+      onPickPhoto: p => setLightbox(p),
+      onOrder: (photo, sizeIdx) => { setLightbox(null); setOrder({ photo, sizeIdx }); }
+    }) : null,
+    order ? e(OrderForm, {
+      photo: order.photo,
+      sizeIdx: order.sizeIdx,
+      allPhotos: data.photos,
+      allSeries: data.series,
+      onClose: () => setOrder(null)
     }) : null
   );
 }
