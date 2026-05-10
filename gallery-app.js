@@ -672,7 +672,8 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
   const handleSubmit = ev => {
     ev.preventDefault();
     setPhase("submitting");
-    const body = new URLSearchParams({
+
+    const fields = {
       "entry.1940650922": firstName,
       "entry.1162546508": lastName,
       "entry.1535148940": email,
@@ -680,15 +681,38 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
       "entry.1021879545": photoCode,
       "entry.100017642":  size.label,
       "entry.775421455":  whiteBorder ? ("Yes, " + borderCmStr + "cm") : "No",
-      "entry.1054355136": specialRequests,
-      "entry.1054355136_sentinel": "",
-      "entry.511285212_sentinel":  "",
+      "entry.1054355136": specialRequests || "",
+    };
+
+    let iframe = document.getElementById("gf-sink");
+    if (!iframe) {
+      iframe = document.createElement("iframe");
+      iframe.id = "gf-sink";
+      iframe.name = "gf-sink";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = FORM_ACTION;
+    form.target = "gf-sink";
+    form.acceptCharset = "UTF-8";
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
     });
-    fetch(FORM_ACTION, {
-      method: "POST", mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body.toString()
-    }).finally(() => setPhase("success"));
+
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => {
+      document.body.removeChild(form);
+      setPhase("success");
+    }, 900);
   };
 
   if (phase === "success") {
