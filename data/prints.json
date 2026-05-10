@@ -5,71 +5,401 @@
       "name": "Adventure",
       "blurb": "Dramatic landscapes, motion, scale.",
       "countries": "NEPAL · THAILAND · ISRAEL",
-      "hero": "/assets/images/prints/adventure/nepal-snow.jpg"
+      "hero": "/assets/images/prints/Nepal-Flag.jpg"
     },
     {
       "id": "escape",
       "name": "Escape",
       "blurb": "Calm, solitary, breathing room.",
       "countries": "ISRAEL · SRI LANKA · THAILAND",
-      "hero": "/assets/images/prints/escape/thailand-boat.jpg"
+      "hero": "/assets/images/prints/Israel - Tree 7x10.jpg"
     },
     {
       "id": "story",
       "name": "Story",
       "blurb": "Human moments, character.",
       "countries": "SRI LANKA · NEPAL · ISRAEL",
-      "hero": "/assets/images/prints/story/the-man.jpg"
+      "hero": "/assets/images/prints/The Man.jpg"
     }
   ],
   "photos": [
-    { "src": "/assets/images/prints/adventure/israel-chill.jpg",            "title": "Mediterranean Drift",  "country": "ISRAEL",     "year": 2024, "series": "adventure", "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/adventure/israel-desert.jpg",           "title": "Dust and Gold",        "country": "ISRAEL",     "year": 2024, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/israel-stars.jpg",            "title": "A Thousand Skies",     "country": "ISRAEL",     "year": 2024, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-bridge.jpg",            "title": "The Crossing",         "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-colors.jpg",            "title": "Wind Colors",          "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-house-on-the-edge.jpg", "title": "On the Edge",          "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-snow.jpg",              "title": "First Snow",           "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-waterfall.jpg",         "title": "The Cascade",          "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-white-mountain.jpg",    "title": "Blanc",                "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/adventure/nepal-flag.jpg",              "title": "Summit Banner",        "country": "NEPAL",      "year": 2024, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/sri-lanka-mountain.jpg",      "title": "Ceylon Heights",       "country": "SRI LANKA",  "year": 2023, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/thailand-bamboo-bridge.jpg",  "title": "Between Banks",        "country": "THAILAND",   "year": 2023, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/thailand-boats.jpg",          "title": "Before the Tide",      "country": "THAILAND",   "year": 2023, "series": "adventure", "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/adventure/thailand-jungle.jpg",         "title": "The Canopy",           "country": "THAILAND",   "year": 2023, "series": "adventure", "orientation": "landscape", "sold": false },
-
-    { "src": "/assets/images/prints/escape/israel-lone-girl.jpg",           "title": "Solitude",             "country": "ISRAEL",     "year": 2024, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/israel-tree.jpg",                "title": "Rooted",               "country": "ISRAEL",     "year": 2024, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/nepal-cloud-9.jpg",              "title": "Cloud Nine",           "country": "NEPAL",      "year": 2024, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/nepal-horse-and-man.jpg",        "title": "Trail Companions",     "country": "NEPAL",      "year": 2024, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/nepal-horse.jpg",                "title": "Free Spirit",          "country": "NEPAL",      "year": 2024, "series": "escape",    "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/escape/nepal-red-cottage.jpg",          "title": "Red in the Mountains", "country": "NEPAL",      "year": 2024, "series": "escape",    "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/escape/nepal-sunrise.jpg",              "title": "First Light",          "country": "NEPAL",      "year": 2024, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/sri-lanka-elephant.jpg",         "title": "Ancient Presence",     "country": "SRI LANKA",  "year": 2023, "series": "escape",    "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/escape/sri-lanka-motion.jpg",           "title": "In Motion",            "country": "SRI LANKA",  "year": 2023, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/thailand-boat.jpg",              "title": "Still Waters",         "country": "THAILAND",   "year": 2023, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/thailand-kayak.jpg",             "title": "Into the Lagoon",      "country": "THAILAND",   "year": 2023, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/thailand-sand-bridge.jpg",       "title": "Between Two Seas",     "country": "THAILAND",   "year": 2023, "series": "escape",    "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/escape/thailand-yellow-kayak.jpg",      "title": "The Yellow Boat",      "country": "THAILAND",   "year": 2023, "series": "escape",    "orientation": "portrait",  "sold": false },
-
-    { "src": "/assets/images/prints/story/bloom.jpg",                       "title": "Bloom",                "country": "ISRAEL",     "year": 2024, "series": "story",     "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/story/hooping-nowhere.jpg",             "title": "Lost in the Circle",   "country": "NEPAL",      "year": 2024, "series": "story",     "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/story/img-4100.jpg",                    "title": "Untitled",             "country": "",           "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/israel-barrels.jpg",              "title": "Aged",                 "country": "ISRAEL",     "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/israel-soldiers.jpg",             "title": "Standing Watch",       "country": "ISRAEL",     "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/nepal-flags.jpg",                 "title": "The Gilded Hour",      "country": "NEPAL",      "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/nepal-hope.jpg",                  "title": "Hope",                 "country": "NEPAL",      "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/nepal-locals.jpg",                "title": "The Locals",           "country": "NEPAL",      "year": 2024, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/nepal-two-horses.jpg",            "title": "Side by Side",         "country": "NEPAL",      "year": 2024, "series": "story",     "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/story/solo.jpg",                        "title": "Solo",                 "country": "ISRAEL",     "year": 2024, "series": "story",     "orientation": "portrait",  "sold": false },
-    { "src": "/assets/images/prints/story/sri-lanka-surf.jpg",              "title": "The Break",            "country": "SRI LANKA",  "year": 2023, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/the-man.jpg",                     "title": "The Man",              "country": "SRI LANKA",  "year": 2023, "series": "story",     "orientation": "landscape", "sold": false },
-    { "src": "/assets/images/prints/story/the-one-koi.jpg",                 "title": "The One Koi",          "country": "ISRAEL",     "year": 2024, "series": "story",     "orientation": "landscape", "sold": false }
+    {
+      "src": "/assets/images/prints/adventure/israel-chill.jpg",
+      "title": "Mediterranean Drift",
+      "series": "adventure",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/israel-desert.jpg",
+      "title": "Dust and Gold",
+      "series": "adventure",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/israel-stars.jpg",
+      "title": "A Thousand Skies",
+      "series": "adventure",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-bridge.jpg",
+      "title": "The Crossing",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-colors.jpg",
+      "title": "Wind Colors",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-house-on-the-edge.jpg",
+      "title": "On the Edge",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-snow.jpg",
+      "title": "First Snow",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-waterfall.jpg",
+      "title": "The Cascade",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-white-mountain.jpg",
+      "title": "Blanc",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/nepal-flag.jpg",
+      "title": "Summit Banner",
+      "series": "adventure",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/sri-lanka-mountain.jpg",
+      "title": "Ceylon Heights",
+      "series": "adventure",
+      "country": "SRI LANKA",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/thailand-bamboo-bridge.jpg",
+      "title": "Between Banks",
+      "series": "adventure",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/thailand-boats.jpg",
+      "title": "Before the Tide",
+      "series": "adventure",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/adventure/thailand-jungle.jpg",
+      "title": "The Canopy",
+      "series": "adventure",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/israel-lone-girl.jpg",
+      "title": "Solitude",
+      "series": "escape",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/israel-tree.jpg",
+      "title": "Rooted",
+      "series": "escape",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/nepal-cloud-9.jpg",
+      "title": "Cloud Nine",
+      "series": "escape",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/nepal-horse-and-man.jpg",
+      "title": "Trail Companions",
+      "series": "escape",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/nepal-horse.jpg",
+      "title": "Free Spirit",
+      "series": "escape",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/nepal-red-cottage.jpg",
+      "title": "Red in the Mountains",
+      "series": "escape",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/nepal-sunrise.jpg",
+      "title": "First Light",
+      "series": "escape",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/sri-lanka-elephant.jpg",
+      "title": "Ancient Presence",
+      "series": "escape",
+      "country": "SRI LANKA",
+      "year": 2023,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/sri-lanka-motion.jpg",
+      "title": "In Motion",
+      "series": "escape",
+      "country": "SRI LANKA",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/thailand-boat.jpg",
+      "title": "Still Waters",
+      "series": "escape",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/thailand-kayak.jpg",
+      "title": "Into the Lagoon",
+      "series": "escape",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/thailand-sand-bridge.jpg",
+      "title": "Between Two Seas",
+      "series": "escape",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/escape/thailand-yellow-kayak.jpg",
+      "title": "The Yellow Boat",
+      "series": "escape",
+      "country": "THAILAND",
+      "year": 2023,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/bloom.jpg",
+      "title": "Bloom",
+      "series": "story",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/hooping-nowhere.jpg",
+      "title": "Lost in the Circle",
+      "series": "story",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/img-4100.jpg",
+      "title": "Untitled",
+      "series": "story",
+      "country": "",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/israel-barrels.jpg",
+      "title": "Aged",
+      "series": "story",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/israel-soldiers.jpg",
+      "title": "Standing Watch",
+      "series": "story",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/nepal-flags.jpg",
+      "title": "The Gilded Hour",
+      "series": "story",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/nepal-hope.jpg",
+      "title": "Hope",
+      "series": "story",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/nepal-locals.jpg",
+      "title": "The Locals",
+      "series": "story",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/nepal-two-horses.jpg",
+      "title": "Side by Side",
+      "series": "story",
+      "country": "NEPAL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/solo.jpg",
+      "title": "Solo",
+      "series": "story",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "portrait",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/sri-lanka-surf.jpg",
+      "title": "The Break",
+      "series": "story",
+      "country": "SRI LANKA",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/the-man.jpg",
+      "title": "The Man",
+      "series": "story",
+      "country": "SRI LANKA",
+      "year": 2023,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/story/the-one-koi.jpg",
+      "title": "The One Koi",
+      "series": "story",
+      "country": "ISRAEL",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    }
   ],
   "sizes": [
-    { "label": "21 × 30 CM",  "price": 150 },
-    { "label": "30 × 40 CM",  "price": 240 },
-    { "label": "50 × 70 CM",  "price": 360 },
-    { "label": "70 × 100 CM", "price": 690 }
+    {
+      "label": "21 × 30 CM",
+      "price": 150
+    },
+    {
+      "label": "30 × 40 CM",
+      "price": 240
+    },
+    {
+      "label": "50 × 70 CM",
+      "price": 360
+    },
+    {
+      "label": "70 × 100 CM",
+      "price": 690
+    }
   ]
 }
