@@ -1,0 +1,72 @@
+{
+  "series": [
+    {
+      "id": "Adventure",
+      "name": "Prayer Flags",
+      "blurb": "Dramatic landscapes, motion, scale.",
+      "countries": "Thailand, Nepal, Sri Lanka, Israel",
+      "hero": "/assets/images/prints/Nepal-Flag.jpg"
+    },
+    {
+      "id": "Escape",
+      "name": "Lone Tree",
+      "blurb": "Calm, solitary, breathing room.",
+      "countries": "Thailand, Nepal, Sri Lanka, Israel",
+      "hero": "/assets/images/prints/Israel - Tree 7x10.jpg"
+    },
+    {
+      "id": "Story",
+      "name": "The Man",
+      "blurb": "Moments, character.",
+      "countries": "Thailand, Nepal, Sri Lanka, Israel",
+      "hero": "/assets/images/prints/The Man.jpg"
+    }
+  ],
+  "photos": [
+    {
+      "src": "/assets/images/prints/Nepal-Flag.jpg",
+      "title": "Prayer Flags",
+      "series": "adventure",
+      "country": "Nepal",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/The Man.jpg",
+      "title": "The Man",
+      "series": "story",
+      "country": "Sri Lanka",
+      "year": 2024,
+      "orientation": "landscape",
+      "sold": false
+    },
+    {
+      "src": "/assets/images/prints/Israel - Tree 7x10.jpg",
+      "title": "Lone Tree",
+      "series": "escape",
+      "country": "Israel",
+      "year": 2025,
+      "orientation": "landscape",
+      "sold": false
+    }
+  ],
+  "sizes": [
+    {
+      "label": "20x30",
+      "price": 150
+    },
+    {
+      "label": "30x40",
+      "price": 240
+    },
+    {
+      "label": "50x70",
+      "price": 360
+    },
+    {
+      "label": "70x100",
+      "price": 690
+    }
+  ]
+}
