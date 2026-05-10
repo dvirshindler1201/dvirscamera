@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery — Dvir Shindler</title>
+  <meta name="description" content="Fine-art prints by Dvir Shindler. Adventure, Escape, and Story — 40 photographs from Nepal, Thailand, Sri Lanka, and Israel. Available to order." />
+  <meta name="robots" content="noimageindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/gallery-styles.css" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --serif: "Playfair Display", "GT Sectra", "Tiempos Headline", Georgia, serif;
+      --mono:  "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    }
+    .boot {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: #fff; color: #0a0a0a; z-index: 9999;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em;
+      pointer-events: none;
+      transition: opacity 800ms cubic-bezier(0.7,0,0.3,1);
+    }
+    .boot--gone { opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="boot" class="boot">DVIR SHINDLER · LOADING</div>
+  <div id="root"></div>
+
+  <script type="text/babel" src="/gallery-app.jsx"></script>
+
+  <script>
+    /* Image-theft deterrents */
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("dragstart",   e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      const k = e.key.toLowerCase();
+      if ((e.metaKey || e.ctrlKey) && ["s","u","p","a"].includes(k)) e.preventDefault();
+    });
+    document.addEventListener("touchstart", e => {
+      if (e.target.closest("img, .photo-shield")) e.preventDefault();
+    }, { passive: false });
+  </script>
+</body>
+</html>
