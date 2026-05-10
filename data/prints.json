@@ -324,7 +324,7 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/nepal-two-horses.jpg",
+      "src": "/assets/images/prints/IMG_5785.jpg",
       "title": "Side by Side",
       "series": "story",
       "country": "NEPAL",
@@ -333,16 +333,16 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/solo.jpg",
+      "src": "/assets/images/prints/Solo.jpg",
       "title": "Solo",
       "series": "story",
-      "country": "ISRAEL",
+      "country": "THAILAND",
       "year": 2024,
       "orientation": "portrait",
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/sri-lanka-surf.jpg",
+      "src": "/assets/images/prints/IMG_4696.jpg",
       "title": "The Break",
       "series": "story",
       "country": "SRI LANKA",
@@ -351,20 +351,20 @@
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/the-man.jpg",
+      "src": "/assets/images/prints/story.webp",
       "title": "The Man",
       "series": "story",
       "country": "SRI LANKA",
-      "year": 2023,
+      "year": 2024,
       "orientation": "landscape",
       "sold": false
     },
     {
-      "src": "/assets/images/prints/story/the-one-koi.jpg",
+      "src": "/assets/images/prints/The One Koi.jpg",
       "title": "The One Koi",
       "series": "story",
-      "country": "ISRAEL",
-      "year": 2024,
+      "country": "THAILAND",
+      "year": 2025,
       "orientation": "landscape",
       "sold": false
     }
