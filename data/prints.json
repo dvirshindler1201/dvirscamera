@@ -1,22 +1,22 @@
 {
   "series": [
     {
-      "id": "Adventure",
-      "name": "Prayer Flags",
+      "id": "adventure",
+      "name": "Adventure",
       "blurb": "Dramatic landscapes, motion, scale.",
       "countries": "Thailand, Nepal, Sri Lanka, Israel",
       "hero": "/assets/images/prints/Nepal-Flag.jpg"
     },
     {
-      "id": "Escape",
-      "name": "Lone Tree",
+      "id": "escape",
+      "name": "Escape",
       "blurb": "Calm, solitary, breathing room.",
       "countries": "Thailand, Nepal, Sri Lanka, Israel",
       "hero": "/assets/images/prints/Israel - Tree 7x10.jpg"
     },
     {
-      "id": "Story",
-      "name": "The Man",
+      "id": "story",
+      "name": "Story",
       "blurb": "Moments, character.",
       "countries": "Thailand, Nepal, Sri Lanka, Israel",
       "hero": "/assets/images/prints/The Man.jpg"
