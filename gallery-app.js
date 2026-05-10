@@ -15,6 +15,13 @@ const cn = (...xs) => xs.filter(Boolean).join(" ");
 const seriesById = (list, id) => list.find(s => s.id === id);
 const photosOf   = (photos, id) => photos.filter(p => p.series === id);
 
+const SERIES_CODE = { adventure: "A", escape: "E", story: "S" };
+const getCode = (photos, photo) => {
+  const sib = photosOf(photos, photo.series);
+  const i   = sib.findIndex(p => p.src === photo.src);
+  return (SERIES_CODE[photo.series] || photo.series[0].toUpperCase()) + String(i + 1).padStart(2, "0");
+};
+
 function Grain() {
   return e("div", { className: "grain", "aria-hidden": "true" });
 }
@@ -247,6 +254,7 @@ function GalleryWalk({ seriesId, series, photos, onPickPhoto, onSwitchSeries, on
             e("div", { className: "photo-shield" })
           ),
           e("div", { className: "placard" },
+            e("span", { className: "placard-code" }, SERIES_CODE[seriesId] + String(i + 1).padStart(2, "0")),
             e("div", { className: cn("placard-title", p.sold && "placard-title--sold") }, p.title),
             e("div", { className: "placard-meta" }, p.year + (p.country ? " \xb7 " + p.country : "")),
             e("button", { className: "placard-link", onClick: () => onPickPhoto(p) },
@@ -315,16 +323,17 @@ function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [photo, onClose, onPickPhoto, allPhotos]);
 
-  const sib    = photosOf(allPhotos, photo.series);
-  const sIdx   = sib.findIndex(p => p.src === photo.src);
-  const prev   = sib[(sIdx - 1 + sib.length) % sib.length];
-  const next   = sib[(sIdx + 1) % sib.length];
-  const more   = sib.filter(p => p.src !== photo.src).slice(0, 3);
-  const series = seriesById(allSeries, photo.series);
-  const cur    = SIZES[size];
+  const sib      = photosOf(allPhotos, photo.series);
+  const sIdx     = sib.findIndex(p => p.src === photo.src);
+  const prev     = sib[(sIdx - 1 + sib.length) % sib.length];
+  const next     = sib[(sIdx + 1) % sib.length];
+  const more     = sib.filter(p => p.src !== photo.src).slice(0, 3);
+  const series   = seriesById(allSeries, photo.series);
+  const cur      = SIZES[size];
+  const photoCode = getCode(allPhotos, photo);
 
   const formUrl = ORDER_FORM
-    + "&entry.1=" + encodeURIComponent(photo.title)
+    + "&entry.1=" + encodeURIComponent(photo.title + " [" + photoCode + "]")
     + "&entry.2=" + encodeURIComponent(cur.label);
 
   return e("div", { className: "lightbox" },
@@ -375,6 +384,7 @@ function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto }) {
         "FROM THE ARCHIVE \xb7 № " + String(sIdx + 1).padStart(3, "0")
       ),
       e("h2", { className: "lb-rail-title" }, photo.title),
+      e("div", { className: "lb-rail-code" }, photoCode),
       e("div", { className: "lb-rail-meta" },
         (photo.country ? photo.country + " \xb7 " : "") + series.name.toUpperCase() + " \xb7 " + photo.year
       ),
@@ -471,6 +481,45 @@ function CustomCursor() {
   );
 }
 
+function CompleteGallery({ series, photos, onPickPhoto }) {
+  return e("section", { className: "complete-gallery" },
+    e("div", { className: "cg-header" },
+      e("div", { className: "cg-eyebrow" }, "COMPLETE COLLECTION"),
+      e("h2", { className: "cg-title" }, "All " + photos.length + " Prints"),
+      e("p", { className: "cg-subtitle" }, "Browse the full archive. Click any print to order.")
+    ),
+    series.map(s => {
+      const seriesPhotos = photosOf(photos, s.id);
+      const code = SERIES_CODE[s.id] || s.id[0].toUpperCase();
+      return e("div", { key: s.id, className: "cg-series" },
+        e("div", { className: "cg-series-header" },
+          e("span", { className: "cg-series-badge" }, code),
+          e("span", { className: "cg-series-name" }, s.name),
+          e("span", { className: "cg-series-count" }, seriesPhotos.length + " prints")
+        ),
+        e("div", { className: "cg-grid" },
+          seriesPhotos.map((p, i) =>
+            e("button", {
+              key: p.src,
+              className: cn("cg-item", "cg-item--" + p.orientation, p.sold && "cg-item--sold"),
+              onClick: () => onPickPhoto(p)
+            },
+              e("img", { src: p.src, alt: p.title, loading: "lazy", draggable: "false" }),
+              e("div", { className: "photo-shield" }),
+              p.sold ? e("span", { className: "cg-sold-badge" }, "SOLD") : null,
+              e("div", { className: "cg-overlay" },
+                e("span", { className: "cg-code" }, code + String(i + 1).padStart(2, "0")),
+                e("span", { className: "cg-item-title" }, p.title)
+              )
+            )
+          )
+        )
+      );
+    }),
+    e(AboutFooter, null)
+  );
+}
+
 function App() {
   const [data, setData]         = useState(null);
   const [phase, setPhase]       = useState("doors");
@@ -487,27 +536,48 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const onPop = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) {
+        setPhase("doors"); setSeriesId(null); setLightbox(null);
+      } else if (["adventure", "escape", "story"].includes(hash)) {
+        setSeriesId(hash); setPhase("walk"); setLightbox(null);
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   if (!data) return null;
 
   const enterSeries = id => {
     setSeriesId(id); setPhase("walk");
-    history.replaceState(null, "", "#" + id);
+    history.pushState({ phase: "walk", id }, "", "#" + id);
     window.scrollTo({ top: 0, behavior: "auto" });
   };
   const goHome = () => {
     setPhase("doors"); setSeriesId(null); setLightbox(null);
-    history.replaceState(null, "", "#");
+    history.pushState({ phase: "doors" }, "", "#");
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   return e("div", { className: "app" },
     e(Grain, null),
     e(CustomCursor, null),
     e(TopBar, { onHome: goHome }),
-    phase === "doors" ? e(ThreeDoors, {
-      series: data.series,
-      photos: data.photos,
-      onEnter: enterSeries
-    }) : null,
+    phase === "doors" ? e(React.Fragment, null,
+      e(ThreeDoors, {
+        series: data.series,
+        photos: data.photos,
+        onEnter: enterSeries
+      }),
+      e(CompleteGallery, {
+        series: data.series,
+        photos: data.photos,
+        onPickPhoto: p => setLightbox(p)
+      })
+    ) : null,
     phase === "walk" && seriesId ? e(React.Fragment, null,
       e(GalleryWalk, {
         seriesId,
