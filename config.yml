@@ -1,0 +1,312 @@
+backend:
+  name: github
+  repo: dvirshindler1201/dvirscamera
+  branch: main
+  base_url: https://dvirscamera-oauth.dvir-shindler.workers.dev
+  auth_endpoint: /auth
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+
+  - name: "hero"
+    label: "🎬 Hero Slideshow"
+    files:
+      - name: "hero"
+        label: "Hero Slideshow Photos"
+        file: "data/hero.json"
+        fields:
+          - label: "Slides"
+            name: "slides"
+            widget: "list"
+            summary: "{{fields.alt}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hero"
+                public_folder: "/assets/images/hero"
+                hint: "Upload landscape (horizontal) photos only for best results"
+              - {label: "Alt Text / Description", name: "alt", widget: "string"}
+
+  - name: "hotels"
+    label: "🏨 Hotels"
+    files:
+      - name: "500rai"
+        label: "500Rai Floating Resort"
+        file: "data/hotels/500rai.json"
+        fields:
+          - {label: "Hotel Name", name: "name", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/500rai"
+                public_folder: "/assets/images/hotels/500rai"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location Tag", name: "tag", widget: "string", default: "Khao Sok, Thailand"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+                default: "landscape"
+
+      - name: "grand-hyatt"
+        label: "Grand Hyatt Erawan Bangkok"
+        file: "data/hotels/grand-hyatt.json"
+        fields:
+          - {label: "Hotel Name", name: "name", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/grand-hyatt"
+                public_folder: "/assets/images/hotels/grand-hyatt"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location Tag", name: "tag", widget: "string", default: "Bangkok, Thailand"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+
+      - name: "ban-sainai"
+        label: "Ban Sainai Resort"
+        file: "data/hotels/ban-sainai.json"
+        fields:
+          - {label: "Hotel Name", name: "name", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/ban-sainai"
+                public_folder: "/assets/images/hotels/ban-sainai"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location Tag", name: "tag", widget: "string", default: "Krabi, Thailand"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+
+      - name: "thantara"
+        label: "Thantara Resort"
+        file: "data/hotels/thantara.json"
+        fields:
+          - {label: "Hotel Name", name: "name", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/thantara"
+                public_folder: "/assets/images/hotels/thantara"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location Tag", name: "tag", widget: "string", default: "Chiang Mai, Thailand"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+
+      - name: "moxy"
+        label: "Moxy by Marriott"
+        file: "data/hotels/moxy.json"
+        fields:
+          - {label: "Hotel Name", name: "name", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/hotels/moxy"
+                public_folder: "/assets/images/hotels/moxy"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location Tag", name: "tag", widget: "string", default: "Bangkok, Thailand"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+
+  - name: "travel"
+    label: "✈️ Travel Photos"
+    files:
+      - name: "travel"
+        label: "Travel Gallery"
+        file: "data/travel.json"
+        fields:
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}} — {{fields.location}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/travel"
+                public_folder: "/assets/images/travel"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location", name: "location", widget: "string"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+                default: "landscape"
+
+  - name: "lifestyle"
+    label: "💑 Lifestyle Photos"
+    files:
+      - name: "lifestyle"
+        label: "Lifestyle Gallery"
+        file: "data/lifestyle.json"
+        fields:
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.caption}} — {{fields.location}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/lifestyle"
+                public_folder: "/assets/images/lifestyle"
+              - {label: "Caption", name: "caption", widget: "string"}
+              - {label: "Location", name: "location", widget: "string"}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+                default: "landscape"
+
+  - name: "hotel-films"
+    label: "🎬 Hotel Films"
+    files:
+      - name: "hotel-films"
+        label: "Hotel Films"
+        file: "data/videos/hotel-films.json"
+        fields:
+          - label: "Films"
+            name: "films"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Vimeo ID"
+                name: "vimeoId"
+                widget: "string"
+                hint: "The number from your Vimeo URL — e.g. vimeo.com/123456789"
+              - label: "Thumbnail"
+                name: "thumbnail"
+                widget: "image"
+                hint: "Screenshot from the video — upload a 16:9 frame"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+
+  - name: "travel-films"
+    label: "✈️ Travel Films"
+    files:
+      - name: "travel-films"
+        label: "Travel Films"
+        file: "data/videos/travel-films.json"
+        fields:
+          - label: "Films"
+            name: "films"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Vimeo ID"
+                name: "vimeoId"
+                widget: "string"
+                hint: "The number from your Vimeo URL — e.g. vimeo.com/123456789"
+              - label: "Thumbnail"
+                name: "thumbnail"
+                widget: "image"
+                hint: "Screenshot from the video — upload a 16:9 frame"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+
+  - name: "prints"
+    label: "🖼️ Prints Gallery"
+    files:
+      - name: "prints"
+        label: "Prints Gallery"
+        file: "data/prints.json"
+        fields:
+          - label: "Series"
+            name: "series"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "ID", name: "id", widget: "hidden"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Blurb", name: "blurb", widget: "string"}
+              - {label: "Countries", name: "countries", widget: "string"}
+              - label: "Hero Image"
+                name: "hero"
+                widget: "image"
+                media_folder: "/assets/images/prints"
+                public_folder: "/assets/images/prints"
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.series}}"
+            fields:
+              - label: "Photo"
+                name: "src"
+                widget: "image"
+                media_folder: "/assets/images/prints"
+                public_folder: "/assets/images/prints"
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "Series"
+                name: "series"
+                widget: "select"
+                options:
+                  - {label: "Adventure", value: "adventure"}
+                  - {label: "Escape", value: "escape"}
+                  - {label: "Story", value: "story"}
+              - {label: "Country", name: "country", widget: "string", required: false}
+              - {label: "Year", name: "year", widget: "number", default: 2025}
+              - label: "Orientation"
+                name: "orientation"
+                widget: "select"
+                options: ["landscape", "portrait"]
+                default: "landscape"
+              - label: "Sold Out"
+                name: "sold"
+                widget: "boolean"
+                default: false
+          - label: "Sizes & Prices"
+            name: "sizes"
+            widget: "list"
+            summary: "{{fields.label}} — ₪{{fields.price}}"
+            fields:
+              - {label: "Size Label", name: "label", widget: "string"}
+              - {label: "Price (₪)", name: "price", widget: "number"}
