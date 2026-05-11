@@ -761,7 +761,15 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
     ),
 
     e("div", { className: "of-photo-panel" },
-      e("div", { className: cn("of-photo-mat", whiteBorder && "of-photo-mat--bordered"), style: { "--border-pct": borderPct } },
+      e("div", {
+        className: cn("of-photo-mat", whiteBorder && "of-photo-mat--bordered"),
+        style: {
+          "--border-pct": borderPct,
+          aspectRatio: photo.orientation === "portrait"
+            ? size.w + " / " + size.h
+            : size.h + " / " + size.w
+        }
+      },
         e("img", { src: photo.src, alt: photo.title, draggable: "false" }),
         e("div", { className: "photo-shield" })
       ),
