@@ -9,8 +9,7 @@ const SIZES = [
   { label: "70 \xd7 100 CM", price: 690, w: 70, h: 100 },
 ];
 
-const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScQJk177SkQuVrCWkcG29DllBctvYI1D_Na6PrVDUDuiTzxig/formResponse";
-const BIT_BASE    = "https://www.bitpay.co.il/app/me/C2EE9C41-8846-5F01-BECB-DFB850342E76EDDC";
+const FORM_ACTION = "https://formspree.io/f/xdabylky";
 
 const cn = (...xs) => xs.filter(Boolean).join(" ");
 const seriesById = (list, id) => list.find(s => s.id === id);
@@ -653,15 +652,15 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
   const photoCode  = getCode(allPhotos, photo);
   const size       = SIZES[sizeIdx];
   const series     = seriesById(allSeries, photo.series);
-  const borderCm   = size.h / 20;
+  const borderCm    = size.h / 20;
   const borderCmStr = (borderCm % 1 === 0 ? borderCm.toFixed(0) : borderCm.toFixed(1));
-  const dominant   = photo.orientation === "landscape" ? size.h : size.w;
-  const borderPct  = ((borderCm / dominant) * 100).toFixed(2) + "%";
-  const bitUrl     = BIT_BASE + "?amount=" + size.price;
-  const qrSrc      = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data="
-                   + encodeURIComponent(bitUrl);
-  const isMobile   = typeof navigator !== "undefined"
-                   && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const dominant    = photo.orientation === "landscape" ? size.h : size.w;
+  const borderPct   = ((borderCm / dominant) * 100).toFixed(2) + "%";
+  const BIT_URL     = "https://www.bitpay.co.il/app/me/C2EE9C41-8846-5F01-BECB-DFB850342E76EDDC";
+  const qrSrc       = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data="
+                    + encodeURIComponent(BIT_URL);
+  const isMobile    = typeof navigator !== "undefined"
+                    && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   useEffect(() => {
     const onKey = ev => { if (ev.key === "Escape") onClose(); };
@@ -672,82 +671,55 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
   const handleSubmit = ev => {
     ev.preventDefault();
     setPhase("submitting");
-
-    const fields = {
-      "entry.1940650922": firstName,
-      "entry.1162546508": lastName,
-      "entry.1535148940": email,
-      "entry.744807541":  phone,
-      "entry.1021879545": photoCode,
-      "entry.100017642":  size.label,
-      "entry.775421455":  whiteBorder ? ("Yes, " + borderCmStr + "cm") : "No",
-      "entry.1054355136": specialRequests || "",
-    };
-
-    let iframe = document.getElementById("gf-sink");
-    if (!iframe) {
-      iframe = document.createElement("iframe");
-      iframe.id = "gf-sink";
-      iframe.name = "gf-sink";
-      iframe.style.display = "none";
-      document.body.appendChild(iframe);
-    }
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = FORM_ACTION;
-    form.target = "gf-sink";
-    form.acceptCharset = "UTF-8";
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-    setTimeout(() => {
-      document.body.removeChild(form);
-      setPhase("success");
-    }, 900);
+    fetch(FORM_ACTION, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        "First Name":      firstName,
+        "Last Name":       lastName,
+        "Email":           email,
+        "Phone":           phone,
+        "Photo":           photoCode + " — " + photo.title,
+        "Size":            size.label,
+        "Price":           "₪" + size.price,
+        "White Border":    whiteBorder ? ("Yes, " + borderCmStr + "cm") : "No",
+        "Special Requests": specialRequests || "—",
+      }),
+    })
+    .finally(() => setPhase("success"));
   };
 
-  if (phase === "success") {
-    return e("div", { className: "of-overlay" },
-      e("button", { className: "lb-close of-close", onClick: onClose },
-        e("span", { className: "lb-close-x" }, "\xd7"),
-        e("span", { className: "lb-close-label" }, "CLOSE")
+  if (phase === “success”) {
+    return e(“div”, { className: “of-overlay” },
+      e(“button”, { className: “lb-close of-close”, onClick: onClose },
+        e(“span”, { className: “lb-close-x” }, “\xd7”),
+        e(“span”, { className: “lb-close-label” }, “CLOSE”)
       ),
-      e("div", { className: "of-success" },
-        e("div", { className: "of-success-eyebrow" }, "ORDER CONFIRMED"),
-        e("h1", { className: "of-success-title" }, "Thank you."),
-        e("p", { className: "of-success-sub" },
-          "Your order for “" + photo.title + "” [" + photoCode + "] has been received. "
-          + "We’ll confirm by email within 24 hours."
+      e(“div”, { className: “of-success” },
+        e(“div”, { className: “of-success-eyebrow” }, “ORDER CONFIRMED”),
+        e(“h1”, { className: “of-success-title” }, “Thank you.”),
+        e(“p”, { className: “of-success-sub” },
+          “Your order for “” + photo.title + “” [“ + photoCode + “] has been received. “
+          + “We’ll confirm by email within 24 hours.”
         ),
-        e("div", { className: "of-payment" },
-          e("div", { className: "of-payment-eyebrow" }, "PAYMENT \xb7 ₪" + size.price),
-          e("div", { className: "of-qr-wrap" },
-            e("img", { src: qrSrc, alt: "Scan to pay via Bit", width: 240, height: 240 })
+        e(“div”, { className: “of-payment” },
+          e(“div”, { className: “of-payment-eyebrow” }, “PAYMENT DUE”),
+          e(“div”, { className: “of-payment-amount” }, “₪” + size.price),
+          e(“div”, { className: “of-qr-wrap” },
+            e(“img”, { src: qrSrc, alt: “Scan to open Bit”, width: 240, height: 240 })
           ),
-          e("p", { className: "of-qr-hint" },
+          e(“p”, { className: “of-qr-hint” },
             isMobile
-              ? "Tap below to open Bit and pay ₪" + size.price
-              : "Bit works on mobile only \xb7 scan the QR with your phone to pay ₪" + size.price
+              ? “Tap to open Bit \xb7 send ₪” + size.price + “ \xb7 include your name as the note”
+              : “Scan to open Bit on your phone \xb7 send ₪” + size.price + “ \xb7 include your name as the note”
           ),
           isMobile
-            ? e("a", {
-                className: "of-bit-btn",
-                href: bitUrl,
-                target: "_blank",
-                rel: "noopener noreferrer"
-              },
-                "Open Bit ",
-                e("span", { className: "arrow" }, "↗")
-              )
+            ? e(“a”, {
+                className: “of-bit-btn”,
+                href: BIT_URL,
+                target: “_blank”,
+                rel: “noopener noreferrer”
+              }, “Open Bit “, e(“span”, { className: “arrow” }, “↗”))
             : null
         )
       )

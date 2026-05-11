@@ -1504,6 +1504,13 @@ img {
   letter-spacing: 0.35em;
   color: rgba(255,255,255,0.35);
 }
+.of-payment-amount {
+  font-family: var(--serif);
+  font-size: clamp(56px, 10vw, 96px);
+  font-weight: 400;
+  color: #f3efe7;
+  line-height: 1;
+}
 .of-qr-wrap {
   background: #fff;
   padding: 12px;
