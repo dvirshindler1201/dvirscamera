@@ -689,37 +689,37 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
     .finally(() => setPhase("success"));
   };
 
-  if (phase === “success”) {
-    return e(“div”, { className: “of-overlay” },
-      e(“button”, { className: “lb-close of-close”, onClick: onClose },
-        e(“span”, { className: “lb-close-x” }, “\xd7”),
-        e(“span”, { className: “lb-close-label” }, “CLOSE”)
+  if (phase === "success") {
+    return e("div", { className: "of-overlay" },
+      e("button", { className: "lb-close of-close", onClick: onClose },
+        e("span", { className: "lb-close-x" }, "\xd7"),
+        e("span", { className: "lb-close-label" }, "CLOSE")
       ),
-      e(“div”, { className: “of-success” },
-        e(“div”, { className: “of-success-eyebrow” }, “ORDER CONFIRMED”),
-        e(“h1”, { className: “of-success-title” }, “Thank you.”),
-        e(“p”, { className: “of-success-sub” },
-          “Your order for “” + photo.title + “” [“ + photoCode + “] has been received. “
-          + “We’ll confirm by email within 24 hours.”
+      e("div", { className: "of-success" },
+        e("div", { className: "of-success-eyebrow" }, "ORDER CONFIRMED"),
+        e("h1", { className: "of-success-title" }, "Thank you."),
+        e("p", { className: "of-success-sub" },
+          "Your order for “" + photo.title + "” [" + photoCode + "] has been received. "
+          + "We’ll confirm by email within 24 hours."
         ),
-        e(“div”, { className: “of-payment” },
-          e(“div”, { className: “of-payment-eyebrow” }, “PAYMENT DUE”),
-          e(“div”, { className: “of-payment-amount” }, “₪” + size.price),
-          e(“div”, { className: “of-qr-wrap” },
-            e(“img”, { src: qrSrc, alt: “Scan to open Bit”, width: 240, height: 240 })
+        e("div", { className: "of-payment" },
+          e("div", { className: "of-payment-eyebrow" }, "PAYMENT DUE"),
+          e("div", { className: "of-payment-amount" }, "₪" + size.price),
+          e("div", { className: "of-qr-wrap" },
+            e("img", { src: qrSrc, alt: "Scan to open Bit", width: 240, height: 240 })
           ),
-          e(“p”, { className: “of-qr-hint” },
+          e("p", { className: "of-qr-hint" },
             isMobile
-              ? “Tap to open Bit \xb7 send ₪” + size.price + “ \xb7 include your name as the note”
-              : “Scan to open Bit on your phone \xb7 send ₪” + size.price + “ \xb7 include your name as the note”
+              ? "Tap to open Bit \xb7 send ₪" + size.price + " \xb7 include your name as the note"
+              : "Scan to open Bit on your phone \xb7 send ₪" + size.price + " \xb7 include your name as the note"
           ),
           isMobile
-            ? e(“a”, {
-                className: “of-bit-btn”,
+            ? e("a", {
+                className: "of-bit-btn",
                 href: BIT_URL,
-                target: “_blank”,
-                rel: “noopener noreferrer”
-              }, “Open Bit “, e(“span”, { className: “arrow” }, “↗”))
+                target: "_blank",
+                rel: "noopener noreferrer"
+              }, "Open Bit ", e("span", { className: "arrow" }, "↗"))
             : null
         )
       )
