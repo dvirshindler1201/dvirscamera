@@ -677,6 +677,9 @@ const T = {
     bitHintDesktop: function(p) { return "Scan to open Bit on your phone \xb7 send ₪" + p + " \xb7 include your name as the note"; },
     openBit: "Open Bit",
     close: "CLOSE",
+    delivery: "Ships within 7–14 days · Israel only",
+    or: "or order via",
+    whatsapp: "WhatsApp",
   },
   he: {
     eyebrow: "הזמנת הדפס",
@@ -697,6 +700,9 @@ const T = {
     bitHintDesktop: function(p) { return "סרוק את ה-QR בטלפון ושלח ₪" + p + " דרך Bit"; },
     openBit: "פתח Bit",
     close: "סגור",
+    delivery: "משלוח תוך 7–14 ימי עסקים · ישראל בלבד",
+    or: "או הזמינו דרך",
+    whatsapp: "WhatsApp",
   }
 };
 
@@ -803,8 +809,11 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
     e("button", {
       className: "of-lang-toggle",
       onClick: () => setLang(lang === "en" ? "he" : "en"),
-      title: lang === "en" ? "Switch to Hebrew" : "Switch to English"
-    }, lang === "en" ? "עב" : "EN"),
+    },
+      lang === "en"
+        ? e(React.Fragment, null, e("span", { className: "of-lang-flag" }, "🇮🇱"), " עברית")
+        : e(React.Fragment, null, e("span", { className: "of-lang-flag" }, "🇬🇧"), " English")
+    ),
 
     e("div", { className: "of-photo-panel" },
       e("div", {
@@ -889,6 +898,20 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
                 e("span", { className: "order-btn-label" }, t.submit),
                 e("span", { className: "order-btn-meta" }, size.label + " \xb7 ₪" + size.price)
               )
+        ),
+
+        e("div", { className: "of-post-submit" },
+          e("div", { className: "of-delivery" }, t.delivery),
+          e("div", { className: "of-or" }, t.or),
+          e("a", {
+            className: "of-whatsapp-btn",
+            href: "https://wa.me/972522415750",
+            target: "_blank",
+            rel: "noopener noreferrer"
+          },
+            e("span", { className: "of-whatsapp-icon" }, "✔"),
+            t.whatsapp
+          )
         )
       )
     )

@@ -1599,23 +1599,75 @@ img {
 /* ── Language toggle ── */
 .of-lang-toggle {
   position: absolute;
-  top: 22px; left: 22px;
+  top: 18px; left: 70px;
   z-index: 20;
-  font-family: var(--mono);
-  font-size: 11px; letter-spacing: 0.22em;
-  color: rgba(255,255,255,0.45);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 5px 10px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #f3efe7;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 6px 14px;
   cursor: pointer;
-  transition: color 300ms, border-color 300ms;
+  transition: background 250ms, border-color 250ms;
 }
-.of-lang-toggle:hover { color: #f3efe7; border-color: rgba(255,255,255,0.4); }
+.of-lang-toggle:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+.of-lang-flag { font-size: 14px; line-height: 1; }
 
 /* ── RTL mode (Hebrew) ── */
 .of-overlay--rtl { direction: rtl; }
-.of-overlay--rtl .of-lang-toggle { left: auto; right: 22px; }
+.of-overlay--rtl .of-lang-toggle { left: auto; right: 70px; }
 .of-overlay--rtl .lb-close.of-close { right: auto; left: 22px; }
 .of-overlay--rtl .of-label { text-align: right; }
+
+/* Hebrew-friendly font stack for RTL text */
+.of-overlay--rtl .of-title,
+.of-overlay--rtl .of-label,
+.of-overlay--rtl .of-input,
+.of-overlay--rtl .of-toggle-hint,
+.of-overlay--rtl .of-eyebrow,
+.of-overlay--rtl .of-delivery,
+.of-overlay--rtl .of-or {
+  font-family: "Helvetica Neue", Arial, "Noto Sans Hebrew", "Arial Hebrew", sans-serif;
+  letter-spacing: 0;
+}
+.of-overlay--rtl .of-title { font-size: 36px; font-style: normal; font-weight: 500; }
+.of-overlay--rtl .of-label { font-size: 12px; opacity: 0.7; }
+.of-overlay--rtl .of-eyebrow { font-size: 12px; }
+
+/* ── Post-submit: delivery + WhatsApp ── */
+.of-post-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 4px;
+}
+.of-delivery {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+.of-or {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.25);
+}
+.of-whatsapp-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 500;
+  color: #f3efe7;
+  background: #25D366;
+  border-radius: 6px;
+  padding: 9px 20px;
+  transition: opacity 250ms;
+}
+.of-whatsapp-icon { font-size: 16px; }
+.of-whatsapp-btn:hover { opacity: 0.88; }
 
 /* ── Size reference guide ── */
 .size-guide { margin-top: 20px; }
