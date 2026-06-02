@@ -369,25 +369,28 @@ img {
   flex-shrink: 0;
   position: relative;
   height: 78vh;
+  width: auto;
   display: flex; flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 900ms var(--ease), transform 900ms var(--ease);
 }
 .walk-item--in { opacity: 1; transform: translateY(0); }
-.walk-item--landscape { width: calc(78vh * 1.5); }
-.walk-item--portrait  { width: calc(78vh * 0.66); }
+.walk-item--landscape { width: auto; }
+.walk-item--portrait  { width: auto; }
 
 .walk-photo {
   position: relative;
-  width: 100%; flex: 1 1 auto;
-  overflow: hidden;
-  background: #1a1a1a;
+  flex: 0 0 auto;
+  height: 60vh;
+  width: auto;
+  overflow: visible;
+  background: transparent;
 }
 .walk-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+  height: 100%; width: auto;
+  display: block;
   transition: transform 1400ms var(--ease), filter var(--med) var(--ease);
 }
 .walk-photo:hover img { transform: scale(1.02); }
@@ -1090,21 +1093,29 @@ img {
   .doors:has(.door--hover) .door:not(.door--hover) { flex-basis: 22%; }
   .door--hover { flex-basis: 56%; }
 
-  .walk-rail { top: 70px; }
+  .walk-rail { display: none; }
   .walk-room-label { display: none; }
   .walk-track {
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
     height: 100vh;
-    padding: 90px 24px 90px;
-    gap: 80px;
+    padding: 90px 20px 90px;
+    gap: 72px;
   }
   .walk-item--landscape, .walk-item--portrait {
     width: 100%;
     height: auto;
   }
-  .walk-photo { height: 60vh; }
+  .walk-photo {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+  }
+  .walk-photo img {
+    width: 100%;
+    height: auto;
+  }
   .walk-num { display: none; }
   .walk-opener, .walk-end { width: 100%; min-width: 0; }
 
@@ -1325,7 +1336,7 @@ img {
 }
 .of-photo-mat img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 .of-photo-info {
