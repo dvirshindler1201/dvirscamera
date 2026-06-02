@@ -1629,11 +1629,17 @@ img {
 .of-overlay--rtl .of-toggle-hint,
 .of-overlay--rtl .of-eyebrow,
 .of-overlay--rtl .of-delivery,
-.of-overlay--rtl .of-or {
+.of-overlay--rtl .of-or,
+.of-overlay--rtl .of-success-title,
+.of-overlay--rtl .of-success-eyebrow,
+.of-overlay--rtl .of-success-sub,
+.of-overlay--rtl .of-payment-eyebrow,
+.of-overlay--rtl .of-qr-hint {
   font-family: "Helvetica Neue", Arial, "Noto Sans Hebrew", "Arial Hebrew", sans-serif;
   letter-spacing: 0;
 }
 .of-overlay--rtl .of-title { font-size: 36px; font-style: normal; font-weight: 500; }
+.of-overlay--rtl .of-success-title { font-size: clamp(56px, 8vw, 100px); font-style: normal; font-weight: 500; }
 .of-overlay--rtl .of-label { font-size: 12px; opacity: 0.7; }
 .of-overlay--rtl .of-eyebrow { font-size: 12px; }
 
@@ -1674,7 +1680,7 @@ img {
 .size-guide-label {
   font-family: var(--mono);
   font-size: 10px; letter-spacing: 0.28em;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
   margin-bottom: 12px;
 }
 .size-guide-visual {
@@ -1720,7 +1726,7 @@ img {
 }
 .size-guide-bar-label {
   font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
   white-space: nowrap;
 }
 

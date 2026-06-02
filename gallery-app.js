@@ -768,7 +768,7 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
   };
 
   if (phase === "success") {
-    return e("div", { className: "of-overlay" },
+    return e("div", { className: cn("of-overlay", lang === "he" && "of-overlay--rtl") },
       e("button", { className: "lb-close of-close", onClick: onClose },
         e("span", { className: "lb-close-x" }, "\xd7"),
         e("span", { className: "lb-close-label" }, t.close)
