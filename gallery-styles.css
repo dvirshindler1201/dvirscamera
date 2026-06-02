@@ -1086,6 +1086,28 @@ img {
    Mobile
    ============================================================ */
 @media (max-width: 820px) {
+  /* ── Topbar: solid white card so it never bleeds into content ── */
+  .topbar {
+    mix-blend-mode: normal;
+    color: var(--ink);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px var(--pad-x);
+    box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+  }
+
+  /* ── Logo: stack "Photography" under "Dvir Shindler" ── */
+  .logo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .logo-mark { font-size: 15px; }
+  .logo-word  { font-size: 8px; letter-spacing: 0.2em; }
+
+  /* ── Doors ── */
   .doors { flex-direction: column; height: 100vh; }
   .door { flex: 1 1 33.333%; }
   .door + .door { border-left: 0; border-top: 1px solid rgba(255,255,255,0.08); }
@@ -1093,12 +1115,15 @@ img {
   .doors:has(.door--hover) .door:not(.door--hover) { flex-basis: 22%; }
   .door--hover { flex-basis: 56%; }
 
+  /* ── Gallery walk ── */
   .walk-rail { display: none; }
   .walk-room-label { display: none; }
   .walk-track {
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior-y: contain;   /* kills the white bounce */
+    -webkit-overflow-scrolling: touch;
     height: 100vh;
     padding: 90px 20px 90px;
     gap: 72px;
@@ -1119,6 +1144,7 @@ img {
   .walk-num { display: none; }
   .walk-opener, .walk-end { width: 100%; min-width: 0; }
 
+  /* ── Lightbox ── */
   .lightbox { grid-template-columns: 1fr; grid-template-rows: 60vh 1fr; }
   .lb-rail { padding: 24px; }
   .lb-photo { height: 48vh; }
