@@ -410,6 +410,30 @@ function Lightbox({ photo, allPhotos, allSeries, onClose, onPickPhoto, onOrder }
         ),
         e("div", { className: "lb-rail-note" },
           "UNFRAMED \xb7 ARCHIVAL FINE-ART PAPER \xb7 SIGNED BY THE ARTIST"
+        ),
+        /* size reference guide */
+        e("div", { className: "size-guide" },
+          e("div", { className: "size-guide-label" }, "SIZE REFERENCE"),
+          e("div", { className: "size-guide-visual" },
+            /* person silhouette line (170cm) */
+            e("div", { className: "size-guide-person" },
+              e("div", { className: "size-guide-head" }),
+              e("div", { className: "size-guide-body" }),
+              e("div", { className: "size-guide-person-label" }, "170 cm")
+            ),
+            /* print size bars */
+            e("div", { className: "size-guide-bars" },
+              SIZES.map(s =>
+                e("div", { key: s.label, className: "size-guide-bar-wrap" },
+                  e("div", {
+                    className: cn("size-guide-bar", cur.label === s.label && "size-guide-bar--active"),
+                    style: { height: ((s.h / 170) * 100) + "%" }
+                  }),
+                  e("div", { className: "size-guide-bar-label" }, s.h + " cm")
+                )
+              )
+            )
+          )
         )
       ),
       e("button", {
@@ -428,7 +452,7 @@ function AboutFooter() {
   return e("section", { className: "about" },
     e("div", { className: "about-rule" }),
     e("p", { className: "about-paragraph" },
-      "“These prints are pieces of journeys — Nepal at dawn, Thailand under monsoon, deserts I came back from changed. Each is printed on archival fine-art paper and signed.”"
+      "\u201cThese prints are pieces of journeys — Nepal at dawn, Thailand under monsoon, deserts I came back from changed. Each is printed on archival fine-art paper and signed.\u201d"
     ),
     e("div", { className: "about-sign" }, "— Dvir Shindler"),
     e("div", { className: "footer-rule" }),
@@ -633,6 +657,49 @@ function AllGalleryWalk({ photos, allPhotos, series, onPickPhoto, onEnterSeries 
   );
 }
 
+const T = {
+  en: {
+    eyebrow: "PLACE YOUR ORDER",
+    title: "Reserve this print.",
+    firstName: "First name", lastName: "Last name",
+    phone: "Phone", email: "Email (optional)",
+    address: "Shipping address", addressHint: "Street, number, apartment",
+    city: "City",
+    whiteBorder: "White border", wbNo: "No", wbYes: "Yes",
+    wbHintOff: "Print fills the paper edge to edge",
+    wbHintOn: "White mat added — preview updated on the left",
+    special: "Special requests", specialHint: "Anything we should know…",
+    submit: "Place order", submitting: "Sending…",
+    confirmed: "ORDER CONFIRMED", thanks: "Thank you.",
+    confirmSub: function(title, code) { return "Your order for \u201c" + title + "\u201d [" + code + "] has been received. We'll confirm by phone within 24 hours."; },
+    payDue: "PAYMENT DUE",
+    bitHintMobile: function(p) { return "Tap to open Bit \xb7 send ₪" + p + " \xb7 include your name as the note"; },
+    bitHintDesktop: function(p) { return "Scan to open Bit on your phone \xb7 send ₪" + p + " \xb7 include your name as the note"; },
+    openBit: "Open Bit",
+    close: "CLOSE",
+  },
+  he: {
+    eyebrow: "הזמנת הדפס",
+    title: "שמור את ההדפס.",
+    firstName: "שם פרטי", lastName: "שם משפחה",
+    phone: "טלפון", email: "אימייל (אופציונלי)",
+    address: "כתובת משלוח", addressHint: "רחוב, מספר, דירה",
+    city: "עיר",
+    whiteBorder: "גבול לבן", wbNo: "לא", wbYes: "כן",
+    wbHintOff: "הדפס מכסה את הנייר עד הקצה",
+    wbHintOn: "גבול לבן נוסף — תצוגה מעודכנת",
+    special: "בקשות מיוחדות", specialHint: "משהו שכדאי שנדע…",
+    submit: "בצע הזמנה", submitting: "שולח…",
+    confirmed: "הזמנה אושררה", thanks: "תודה.",
+    confirmSub: function(title, code) { return "הזמנתך עבור \"" + title + "\" [" + code + "] התקבלה. נחזור אליך בטלפון תוך 24 שעות."; },
+    payDue: "תשלום נדרש",
+    bitHintMobile: function(p) { return "לחץ לפתיחת Bit \xb7 שלח ₪" + p + " \xb7 כלול את שמך בהערה"; },
+    bitHintDesktop: function(p) { return "סרוק את ה-QR בטלפון ושלח ₪" + p + " דרך Bit"; },
+    openBit: "פתח Bit",
+    close: "סגור",
+  }
+};
+
 function OrderField({ label, children }) {
   return e("div", { className: "of-field" },
     e("label", { className: "of-label" }, label),
@@ -641,13 +708,17 @@ function OrderField({ label, children }) {
 }
 
 function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
-  const [firstName,       setFirstName]       = useState("");
-  const [lastName,        setLastName]         = useState("");
-  const [email,           setEmail]            = useState("");
-  const [phone,           setPhone]            = useState("");
-  const [whiteBorder,     setWhiteBorder]      = useState(false);
-  const [specialRequests, setSpecialRequests]  = useState("");
-  const [phase,           setPhase]            = useState("form"); // "form"|"submitting"|"success"
+  const [lang,           setLang]             = useState("en");
+  const [firstName,      setFirstName]        = useState("");
+  const [lastName,       setLastName]         = useState("");
+  const [email,          setEmail]            = useState("");
+  const [phone,          setPhone]            = useState("");
+  const [address,        setAddress]          = useState("");
+  const [city,           setCity]             = useState("");
+  const [whiteBorder,    setWhiteBorder]      = useState(false);
+  const [specialRequests,setSpecialRequests]  = useState("");
+  const [phase,          setPhase]            = useState("form"); // "form"|"submitting"|"success"
+  const t = T[lang];
 
   const photoCode  = getCode(allPhotos, photo);
   const size       = SIZES[sizeIdx];
@@ -683,6 +754,7 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
         "Size":            size.label,
         "Price":           "₪" + size.price,
         "White Border":    whiteBorder ? ("Yes, " + borderCmStr + "cm") : "No",
+        "Shipping Address": address + (city ? ", " + city : ""),
         "Special Requests": specialRequests || "—",
       }),
     })
@@ -693,25 +765,20 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
     return e("div", { className: "of-overlay" },
       e("button", { className: "lb-close of-close", onClick: onClose },
         e("span", { className: "lb-close-x" }, "\xd7"),
-        e("span", { className: "lb-close-label" }, "CLOSE")
+        e("span", { className: "lb-close-label" }, t.close)
       ),
       e("div", { className: "of-success" },
-        e("div", { className: "of-success-eyebrow" }, "ORDER CONFIRMED"),
-        e("h1", { className: "of-success-title" }, "Thank you."),
-        e("p", { className: "of-success-sub" },
-          "Your order for “" + photo.title + "” [" + photoCode + "] has been received. "
-          + "We’ll confirm by email within 24 hours."
-        ),
+        e("div", { className: "of-success-eyebrow" }, t.confirmed),
+        e("h1", { className: "of-success-title" }, t.thanks),
+        e("p", { className: "of-success-sub" }, t.confirmSub(photo.title, photoCode)),
         e("div", { className: "of-payment" },
-          e("div", { className: "of-payment-eyebrow" }, "PAYMENT DUE"),
+          e("div", { className: "of-payment-eyebrow" }, t.payDue),
           e("div", { className: "of-payment-amount" }, "₪" + size.price),
           e("div", { className: "of-qr-wrap" },
             e("img", { src: qrSrc, alt: "Scan to open Bit", width: 240, height: 240 })
           ),
           e("p", { className: "of-qr-hint" },
-            isMobile
-              ? "Tap to open Bit \xb7 send ₪" + size.price + " \xb7 include your name as the note"
-              : "Scan to open Bit on your phone \xb7 send ₪" + size.price + " \xb7 include your name as the note"
+            isMobile ? t.bitHintMobile(size.price) : t.bitHintDesktop(size.price)
           ),
           isMobile
             ? e("a", {
@@ -719,18 +786,25 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
                 href: BIT_URL,
                 target: "_blank",
                 rel: "noopener noreferrer"
-              }, "Open Bit ", e("span", { className: "arrow" }, "↗"))
+              }, t.openBit, " ", e("span", { className: "arrow" }, "↗"))
             : null
         )
       )
     );
   }
 
-  return e("div", { className: "of-overlay" },
+  return e("div", { className: cn("of-overlay", lang === "he" && "of-overlay--rtl") },
     e("button", { className: "lb-close of-close", onClick: onClose },
       e("span", { className: "lb-close-x" }, "\xd7"),
-      e("span", { className: "lb-close-label" }, "CLOSE")
+      e("span", { className: "lb-close-label" }, t.close)
     ),
+
+    /* language toggle */
+    e("button", {
+      className: "of-lang-toggle",
+      onClick: () => setLang(lang === "en" ? "he" : "en"),
+      title: lang === "en" ? "Switch to Hebrew" : "Switch to English"
+    }, lang === "en" ? "עב" : "EN"),
 
     e("div", { className: "of-photo-panel" },
       e("div", {
@@ -754,58 +828,65 @@ function OrderForm({ photo, sizeIdx, allPhotos, allSeries, onClose }) {
 
     e("div", { className: "of-form-panel" },
       e("div", { className: "of-header" },
-        e("div", { className: "of-eyebrow" }, "PLACE YOUR ORDER"),
-        e("h1", { className: "of-title" }, "Reserve this print.")
+        e("div", { className: "of-eyebrow" }, t.eyebrow),
+        e("h1", { className: "of-title" }, t.title)
       ),
 
       e("form", { className: "of-fields", onSubmit: handleSubmit },
         e("div", { className: "of-row" },
-          e(OrderField, { label: "First name" },
+          e(OrderField, { label: t.firstName },
             e("input", { className: "of-input", type: "text", required: true,
               value: firstName, onChange: ev => setFirstName(ev.target.value) })
           ),
-          e(OrderField, { label: "Last name" },
+          e(OrderField, { label: t.lastName },
             e("input", { className: "of-input", type: "text", required: true,
               value: lastName, onChange: ev => setLastName(ev.target.value) })
           )
         ),
-        e(OrderField, { label: "Email" },
-          e("input", { className: "of-input", type: "email", required: true,
-            value: email, onChange: ev => setEmail(ev.target.value) })
-        ),
-        e(OrderField, { label: "Phone" },
+        e(OrderField, { label: t.phone },
           e("input", { className: "of-input", type: "tel", required: true,
             value: phone, onChange: ev => setPhone(ev.target.value) })
         ),
+        e(OrderField, { label: t.email },
+          e("input", { className: "of-input", type: "email",
+            value: email, onChange: ev => setEmail(ev.target.value) })
+        ),
+        e(OrderField, { label: t.address },
+          e("input", { className: "of-input", type: "text", required: true,
+            placeholder: t.addressHint,
+            value: address, onChange: ev => setAddress(ev.target.value) })
+        ),
+        e(OrderField, { label: t.city },
+          e("input", { className: "of-input", type: "text", required: true,
+            value: city, onChange: ev => setCity(ev.target.value) })
+        ),
 
         e("div", { className: "of-field" },
-          e("label", { className: "of-label" }, "White border"),
+          e("label", { className: "of-label" }, t.whiteBorder),
           e("div", { className: "of-toggle" },
             e("button", { type: "button",
               className: cn("of-toggle-btn", !whiteBorder && "of-toggle-btn--on"),
-              onClick: () => setWhiteBorder(false) }, "No"),
+              onClick: () => setWhiteBorder(false) }, t.wbNo),
             e("button", { type: "button",
               className: cn("of-toggle-btn", whiteBorder && "of-toggle-btn--on"),
-              onClick: () => setWhiteBorder(true) }, "Yes")
+              onClick: () => setWhiteBorder(true) }, t.wbYes)
           ),
           e("p", { className: "of-toggle-hint" },
-            whiteBorder
-              ? "White mat added — preview updated on the left"
-              : "Print fills the paper edge to edge"
+            whiteBorder ? t.wbHintOn : t.wbHintOff
           )
         ),
 
-        e(OrderField, { label: "Special requests" },
+        e(OrderField, { label: t.special },
           e("textarea", { className: "of-input of-textarea", rows: 3,
-            placeholder: "Anything we should know…",
+            placeholder: t.specialHint,
             value: specialRequests, onChange: ev => setSpecialRequests(ev.target.value) })
         ),
 
         e("button", { type: "submit", className: "of-submit", disabled: phase === "submitting" },
           phase === "submitting"
-            ? "Sending…"
+            ? t.submitting
             : e(React.Fragment, null,
-                e("span", { className: "order-btn-label" }, "Place order"),
+                e("span", { className: "order-btn-label" }, t.submit),
                 e("span", { className: "order-btn-meta" }, size.label + " \xb7 ₪" + size.price)
               )
         )
