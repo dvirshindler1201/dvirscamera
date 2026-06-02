@@ -1087,7 +1087,7 @@ img {
    ============================================================ */
 @media (max-width: 820px) {
   /* ── Kill iOS elastic bounce on the outer shell ── */
-  html, body { overscroll-behavior: none; }
+  html, body { overscroll-behavior: none; overflow: hidden; }
 
   /* ── Topbar: slimmer solid white card ── */
   .topbar {
@@ -1138,8 +1138,7 @@ img {
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
-    overscroll-behavior-y: contain;   /* kills the white bounce */
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
     height: 100vh;
     padding: 90px 20px 90px;
     gap: 72px;
@@ -1161,9 +1160,11 @@ img {
   .walk-opener, .walk-end { width: 100%; min-width: 0; }
 
   /* ── Lightbox ── */
-  .lightbox { grid-template-columns: 1fr; grid-template-rows: 60vh 1fr; }
+  .lightbox { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .lb-stage { height: auto; }
+  .lb-clean { padding: 56px 24px 28px; gap: 16px; position: relative; inset: auto; }
+  .lb-photo { height: 42vh; }
   .lb-rail { padding: 24px; }
-  .lb-photo { height: 48vh; }
   .lb-nav--next { right: 18px; }
   .lb-more { display: none; }
 }
@@ -1597,10 +1598,23 @@ img {
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .of-overlay { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
-  .of-photo-panel { padding: 100px 28px 32px; min-height: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .of-photo-mat { max-width: 280px; }
-  .of-form-panel { padding: 36px 28px 60px; }
-  .of-row { grid-template-columns: 1fr; gap: 28px; }
+  .of-overlay {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+    overscroll-behavior: none;
+  }
+  .of-photo-panel {
+    padding: 52px 28px 20px;  /* was 100px top — much tighter */
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 14px;
+  }
+  .of-photo-mat { max-width: 220px; }
+  .of-form-panel { padding: 28px 28px 60px; gap: 28px; }
+  .of-header { gap: 6px; }
+  .of-title { font-size: 28px; }
+  .of-row { grid-template-columns: 1fr; gap: 20px; }
   .of-success { padding: 60px 28px; }
 }
